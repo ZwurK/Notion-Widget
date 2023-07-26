@@ -4,34 +4,45 @@
   "info": {
     "singularName": "widget",
     "pluralName": "widgets",
-    "displayName": "Widget"
+    "displayName": "Widget",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
   },
   "pluginOptions": {},
   "attributes": {
-    "Title": {
+    "title": {
       "type": "string"
     },
-    "Description": {
+    "description": {
       "type": "richtext"
     },
-    "Image": {
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
     },
-    "Price": {
+    "price": {
       "type": "integer"
     },
-    "Downloads": {
+    "downloads": {
       "type": "integer"
+    },
+    "code": {
+      "type": "richtext"
+    },
+    "author": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "widgets"
     }
   }
 }

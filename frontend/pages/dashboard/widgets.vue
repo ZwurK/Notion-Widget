@@ -1,7 +1,6 @@
 <template>
-
-    <div>test</div>
-
+    <div class="flex flex-wrap justify-center">
+    </div>
 </template>
 
 <script setup>

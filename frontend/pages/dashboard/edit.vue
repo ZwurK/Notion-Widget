@@ -32,6 +32,10 @@
 
 <script setup>
 
+definePageMeta({
+    layout: 'dashboard'
+})
+
 // Fetch user data
 
 const user = useStrapiUser();

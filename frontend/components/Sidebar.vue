@@ -7,6 +7,9 @@
         <nav class="mt-10">
             <NuxtLink class="block px-6 py-2 mt-2 text-sm font-semibold text-white rounded hover:bg-gray-700">Tableau de
                 bord</NuxtLink>
+            <NuxtLink to="/dashboard/widgets"
+                class="block px-6 py-2 mt-2 text-sm font-semibold text-white rounded hover:bg-gray-700">My widgets
+            </NuxtLink>
             <NuxtLink to="/dashboard/edit"
                 class="block px-6 py-2 mt-2 text-sm font-semibold text-white rounded hover:bg-gray-700">Edit account
             </NuxtLink>

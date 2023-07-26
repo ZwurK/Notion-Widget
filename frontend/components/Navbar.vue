@@ -9,7 +9,7 @@
 
                 <!-- Menu -->
                 <div class="flex items-center space-x-4">
-                    <a href="/about" class="hover:bg-gray-700 px-3 py-2 rounded">Create</a>
+                    <NuxtLink to="/dashboard/create" class="hover:bg-gray-700 px-3 py-2 rounded">Create</NuxtLink>
                     <!-- Icône de compte -->
                     <div class="relative">
                         <div v-if="token"
@@ -17,10 +17,10 @@
                             <NuxtLink to="/dashboard" class="text-xl" title="Gestion du compte">👤</NuxtLink>
                         </div>
                         <div v-else>
-                            <NuxtLink to="/login" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                            <NuxtLink to="/auth/login" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                                 Log in
                             </NuxtLink>
-                            <NuxtLink to="/register" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                            <NuxtLink to="/auth/register" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                                 Sign up
                             </NuxtLink>
                         </div>

@@ -12,6 +12,10 @@
       </div>
       <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700">Login</button>
     </form>
+    <div class="mt-4 text-sm">
+      <NuxtLink to="/auth/register" class="text-blue-500 hover:text-blue-700 mr-4">Already have an account? Register</NuxtLink>
+      <NuxtLink to="/auth/forgot-password" class="text-blue-500 hover:text-blue-700">Forgot password?</NuxtLink>
+    </div>
     <div v-if="errors" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
       <span class="block sm:inline">{{ errors }}</span>
       <span class="absolute top-0 bottom-0 right-0 px-4 py-3">

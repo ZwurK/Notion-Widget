@@ -19,8 +19,8 @@
       Chargement en cours...
     </div>
     <div v-else class="container mx-auto p-4">
-      <WidgetCard v-for="widget in widgetStore.widgets" :key="widget.id" :title="widget.attributes.Title"
-        :description="widget.attributes.Description" :downloads="widget.attributes.Downloads" />
+      <WidgetCard v-for="widget in widgetStore.widgets" :key="widget.id" :title="widget.attributes.title"
+        :description="widget.attributes.description" :downloads="widget.attributes.downloads" />
     </div>
   </div>
 </template>
