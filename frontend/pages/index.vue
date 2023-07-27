@@ -2,45 +2,44 @@
   <div>
     <!-- Barre de recherche -->
     <div class="container mx-auto p-4">
-      <h1 class="text-lg">Find the perfect notion widget.</h1>
+      <div class="my-10">
+        <h1 class="text-3xl text-center mb-2">Notion, Reimagined by You.</h1>
+        <h1 class="text-md text-gray-500 text-center">
+          Thousands of widgets ready to use.
+        </h1>
+      </div>
       <form @submit.prevent="searchWidgets">
         <div class="flex border rounded overflow-hidden">
-          <input v-model="searchQuery" type="text" placeholder="Rechercher des widgets..."
-            class="px-4 py-2 w-full outline-none" />
-          <button type="submit" class="bg-blue-500 text-white px-4 py-2 hover:bg-blue-600">
-            Rechercher
+          <input
+            v-model="searchQuery"
+            type="text"
+            placeholder="Search widgets..."
+            class="px-4 py-2 w-full outline-none"
+          />
+          <button type="submit" class="bg-black text-white px-4 py-2">
+            Search
           </button>
         </div>
       </form>
-    </div>
-
-    <!-- Affichage de WidgetCard -->
-    <div v-if="pending">
-      Chargement en cours...
-    </div>
-    <div v-else class="container mx-auto p-4">
-      <WidgetCard v-for="widget in widgetStore.widgets" :key="widget.id" :id="widget.id" :title="widget.attributes.title"
-        :description="widget.attributes.description" :downloads="widget.attributes.downloads" />
+      <div class="flex gap-4 mt-10">
+        <WidgetCard
+          v-for="widget in widgets.data"
+          :key="widget.id"
+          :id="widget.id"
+          :title="widget.attributes.title"
+          :image="widget.attributes.image.data.attributes.url"
+          :description="widget.attributes.description"
+          :downloads="widget.attributes.downloads"
+        />
+      </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { useWidgetStore } from '~/stores/widget';
-
-let searchQuery = ref('');
+let searchQuery = ref("");
 let pending = ref(false);
 
-const widgetStore = useWidgetStore();
-
-const searchWidgets = async () => {
-    pending.value = true;
-    await widgetStore.fetchWidgets(searchQuery.value);
-    pending.value = false;
-};
-
-onMounted(async () => {
-    // Si vous souhaitez charger les widgets par défaut lors du montage
-    await searchWidgets();
-});
+const { find } = useStrapi();
+const widgets = await find("widgets", { populate: "image" });
 </script>
