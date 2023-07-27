@@ -1,6 +1,6 @@
 <template>
-  <div class="bg-white p-8 rounded shadow-md w-full max-w-md mx-auto">
-    <h2 class="text-2xl font-bold mb-6">Créer un nouveau widget</h2>
+  <div class="container mx-auto p-4">
+    <h2 class="text-2xl font-bold mb-6">Create a new widget</h2>
     <form @submit.prevent="handleCreateWidget">
       <div class="mb-4">
         <label for="title" class="block text-sm font-medium text-gray-700 mb-2"
@@ -11,7 +11,7 @@
           id="title"
           v-model="widget.title"
           required
-          class="w-full p-2 border rounded focus:outline-none focus:border-blue-500"
+          class="w-full p-2 border border-gray-300 rounded"
         />
       </div>
       <div class="mb-4">
@@ -24,7 +24,7 @@
           id="description"
           v-model="widget.description"
           required
-          class="w-full p-2 border rounded focus:outline-none focus:border-blue-500"
+          class="w-full p-2 border border-gray-300 rounded"
         ></textarea>
       </div>
       <div class="mb-4">
@@ -35,7 +35,7 @@
           id="code"
           v-model="widget.code"
           required
-          class="w-full p-2 border rounded focus:outline-none focus:border-blue-500"
+          class="w-full p-2 border border-gray-300 rounded"
         ></textarea>
       </div>
       <div class="mb-4">
@@ -47,7 +47,7 @@
           id="price"
           v-model="widget.price"
           required
-          class="w-full p-2 border rounded focus:outline-none focus:border-blue-500"
+          class="w-full p-2 border border-gray-300 rounded"
         />
       </div>
       <div class="mb-4">
@@ -59,21 +59,26 @@
           id="image"
           ref="imageInput"
           @change="handleFileChange"
-          class="w-full p-2 border rounded focus:outline-none focus:border-blue-500"
+          class="w-full p-2 border border-gray-300 rounded"
         />
       </div>
 
       <button
         type="submit"
-        class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded focus:outline-none"
+        class="bg-black text-white py-2 px-4 rounded w-full"
       >
-        Créer
+        Create
       </button>
     </form>
   </div>
 </template>
 
 <script setup>
+
+definePageMeta({
+    layout: 'dashboard'
+})
+
 const user = useStrapiUser();
 const client = useStrapiClient()
 

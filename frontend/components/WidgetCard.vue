@@ -1,7 +1,6 @@
 <template>
-  <NuxtLink
-    :to="`/widget/${id}`"
-    class="border-2 border-black flex flex-col h-96 w-96 overflow-hidden"
+  <div @click="navigateTo(`/widget/${id}`)"
+    class="border-2 border-black flex flex-col h-96 w-96 overflow-hidden relative cursor-pointer"
   >
     <img
       :src="'http://localhost:1337' + image"
@@ -21,10 +20,27 @@
         {{ downloads || 0 }} <span class="mx-1">downloads</span>
       </span>
     </div>
-  </NuxtLink>
+    <div
+      v-if="route.path === '/dashboard/my-widgets'"
+      class="absolute bottom-2 right-2 space-x-2"
+    >
+      <button @click.stop class="bg-black text-white p-2 rounded">
+        <IconsEdit />
+      </button>
+      <button
+        @click.stop="handleDeleteWidget(id)"
+        class="bg-red-700 text-white p-2 rounded"
+      >
+        <IconsDelete />
+      </button>
+    </div>
+  </div>
 </template>
 
 <script setup>
+const route = useRoute();
+console.log(route.path);
+
 const props = defineProps({
   id: {
     type: Number,
@@ -47,4 +63,15 @@ const props = defineProps({
     default: 0,
   },
 });
+
+// Handle delete widget
+const { delete: _delete } = useStrapi();
+
+const handleDeleteWidget = async (id) => {
+  try {
+    const response = await _delete("widgets", id);
+  } catch (error) {
+    console.error("Error:", error);
+  }
+};
 </script>

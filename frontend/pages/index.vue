@@ -21,7 +21,7 @@
           </button>
         </div>
       </form>
-      <div class="flex gap-4 mt-10">
+      <div class="flex flex-wrap gap-4 mt-10" v-if="widgets">
         <WidgetCard
           v-for="widget in widgets.data"
           :key="widget.id"
@@ -38,8 +38,19 @@
 
 <script setup>
 let searchQuery = ref("");
-let pending = ref(false);
-
+const widgets = ref(null);
 const { find } = useStrapi();
-const widgets = await find("widgets", { populate: "image" });
+
+const searchWidgets = async () => {
+  const response = await find("widgets", {
+    populate: "image",
+    _q: searchQuery.value
+  });
+  widgets.value = response;
+  console.log(searchQuery.value)
+};
+
+onMounted(async () => {
+    await searchWidgets();
+});
 </script>
