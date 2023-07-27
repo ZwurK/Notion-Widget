@@ -5,6 +5,11 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss', 'nuxt-headlessui', '@pinia/nuxt', '@nuxtjs/strapi'
   ],
 
+  strapi: {
+    auth: {
+      populate: ['widgets']
+    }
+  },
 
   runtimeConfig: {
     public: {
@@ -15,5 +20,5 @@ export default defineNuxtConfig({
         }
       },
     },
-  },
+  }
 })
