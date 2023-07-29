@@ -40,6 +40,8 @@
 
 <script setup>
 
+import { useToast } from "vue-toastification";
+
 const props = defineProps({
   isOpen: {
     type: Boolean,
@@ -62,7 +64,13 @@ const { delete: _delete } = useStrapi();
 const handleDeleteWidget = async () => {
   try {
     const response = await _delete("widgets", props.widgetId);
-    closeModal(); // Fermez la modale après la suppression
+    closeModal();
+    const toast = useToast();
+
+toast.success("Widget successfully deleted.", {
+  timeout: 2000,
+  toastClassName: "custom-toast",
+});
   } catch (error) {
     console.error("Error:", error);
   }

@@ -43,5 +43,6 @@ if (userWidgetsId.length) {
 
 definePageMeta({
   layout: "dashboard",
+  middleware: 'auth'
 });
 </script>

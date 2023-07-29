@@ -5,6 +5,9 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss', 'nuxt-headlessui', '@pinia/nuxt', '@nuxtjs/strapi', '@vueuse/nuxt'
   ],
 
+  css: ['~/assets/css/main.css'],
+
+
   strapi: {
     auth: {
       populate: ['widgets']
@@ -21,5 +24,10 @@ export default defineNuxtConfig({
         }
       },
     },
+  },
+
+  build: {
+    transpile: ['vue-toastification'],
   }
+
 })

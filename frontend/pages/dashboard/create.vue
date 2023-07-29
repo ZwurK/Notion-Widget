@@ -74,13 +74,10 @@
 </template>
 
 <script setup>
-
-definePageMeta({
-    layout: 'dashboard'
-})
+import { useToast } from "vue-toastification";
 
 const user = useStrapiUser();
-const client = useStrapiClient()
+const client = useStrapiClient();
 
 const widget = ref({
   title: "",
@@ -92,9 +89,8 @@ const widget = ref({
 const imageInput = ref(null);
 
 const handleFileChange = () => {
-  console.log('File changed:', imageInput.value.files[0]);
+  console.log("File changed:", imageInput.value.files[0]);
 };
-
 
 const handleCreateWidget = async () => {
   try {
@@ -110,10 +106,24 @@ const handleCreateWidget = async () => {
       body: formData,
     });
 
-    // Vous pouvez maintenant utiliser 'data' si nécessaire
+    const toast = useToast();
+
+    toast.success("Widget successfully created.", {
+      timeout: 2000,
+      toastClassName: "custom-toast",
+    });
   } catch (error) {
-    console.error("Erreur lors de la création du widget:", error);
-    // Affichez une erreur à l'utilisateur ici
+    const toast = useToast();
+
+    toast.error(error.error.message, {
+      timeout: 2000,
+      toastClassName: "custom-toast",
+    });
   }
 };
+
+definePageMeta({
+  layout: "dashboard",
+  middleware: 'auth'
+});
 </script>

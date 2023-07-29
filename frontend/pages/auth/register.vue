@@ -66,6 +66,7 @@
 </template>
 
 <script setup>
+import { useToast } from "vue-toastification";
 const { register } = useStrapiAuth();
 
 const username = ref("");
@@ -84,9 +85,22 @@ const handleRegister = async () => {
       email: email.value,
       password: password.value,
     });
+
+    const toast = useToast();
+
+    toast.success("You have successfully registered.", {
+      timeout: 2000,
+      toastClassName: "custom-toast",
+    });
+
     navigateTo("/");
   } catch (error) {
-    errors.value = error.error.message;
+    const toast = useToast();
+
+    toast.error(error.error.message, {
+      timeout: 2000,
+      toastClassName: "custom-toast",
+    });
   }
 };
 </script>

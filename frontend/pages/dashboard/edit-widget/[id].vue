@@ -4,9 +4,7 @@
 
     <form @submit.prevent="handleChangePassword">
       <div class="mb-4">
-        <label
-          for="title"
-          class="block mb-2 text-sm font-bold text-gray-600"
+        <label for="title" class="block mb-2 text-sm font-bold text-gray-600"
           >Title:</label
         >
         <input
@@ -30,9 +28,7 @@
         ></textarea>
       </div>
       <div class="mb-4">
-        <label
-          for="code"
-          class="block mb-2 text-sm font-bold text-gray-600"
+        <label for="code" class="block mb-2 text-sm font-bold text-gray-600"
           >Code:</label
         >
         <textarea
@@ -43,9 +39,7 @@
         ></textarea>
       </div>
       <div class="mb-4">
-        <label
-          for="price"
-          class="block mb-2 text-sm font-bold text-gray-600"
+        <label for="price" class="block mb-2 text-sm font-bold text-gray-600"
           >Price:</label
         >
         <input
@@ -56,9 +50,7 @@
         />
       </div>
       <div class="mb-4">
-        <label
-          for="image"
-          class="block mb-2 text-sm font-bold text-gray-600"
+        <label for="image" class="block mb-2 text-sm font-bold text-gray-600"
           >Image:</label
         >
         <input
@@ -68,7 +60,7 @@
         />
       </div>
       <button
-      @click="handleUpdateWidget"
+        @click="handleUpdateWidget"
         type="submit"
         class="w-full py-2 px-4 bg-black text-white rounded"
       >
@@ -79,43 +71,61 @@
 </template>
 
 <script setup>
-definePageMeta({
-  layout: "dashboard",
-});
+import { useToast } from "vue-toastification";
 
 const route = useRoute();
 
 const widgetData = ref({
-  title: '',
-  description: '',
-  code: '',
-  price: '',
+  title: "",
+  description: "",
+  code: "",
+  price: "",
 });
 
 const handleUpdateWidget = async () => {
   try {
-    const { update } = useStrapi()
-    await update('widgets', route.params.id, { title: widgetData.value.title, description: widgetData.value.description, code: widgetData.value.code, price: widgetData.value.price })
-  } catch (error) { 
-    console.log(error);
-  }
-}
+    const { update } = useStrapi();
+    await update("widgets", route.params.id, {
+      title: widgetData.value.title,
+      description: widgetData.value.description,
+      code: widgetData.value.code,
+      price: widgetData.value.price,
+    });
+    const toast = useToast();
 
+    toast.success("Widget successfully changed.", {
+      timeout: 2000,
+      toastClassName: "custom-toast",
+    });
+  } catch (error) {
+    const toast = useToast();
+
+    toast.error(error.error.message, {
+      timeout: 2000,
+      toastClassName: "custom-toast",
+    });
+  }
+};
 
 onMounted(async () => {
   try {
     const { findOne } = useStrapi();
     const id = route.params.id;
-    const widget = await findOne("widgets", route.params.id, { populate: "image" });
+    const widget = await findOne("widgets", route.params.id, {
+      populate: "image",
+    });
     widgetData.value.title = widget.data.attributes.title;
     widgetData.value.description = widget.data.attributes.description;
     widgetData.value.code = widget.data.attributes.code;
     widgetData.value.price = widget.data.attributes.price;
-    console.log(widget)
+    console.log(widget);
   } catch (error) {
     console.error("Error:", error);
   }
 });
 
-
+definePageMeta({
+  layout: "dashboard",
+  middleware: 'auth'
+});
 </script>

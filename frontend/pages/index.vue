@@ -38,6 +38,7 @@
 </template>
 
 <script setup>
+
 let searchQuery = ref("");
 const widgets = ref(null);
 const { find } = useStrapi();
@@ -52,8 +53,8 @@ const searchWidgets = async (append = false) => {
     _q: searchQuery.value,
     pagination: {
       limit: itemsPerPage,
-      start: (currentPage.value - 1) * itemsPerPage
-    }
+      start: (currentPage.value - 1) * itemsPerPage,
+    },
   });
 
   if (append && widgets.value) {
