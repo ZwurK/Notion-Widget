@@ -1,5 +1,10 @@
 <template>
-  <div @click="navigateTo(`/widget/${id}`)"
+<client-only>
+  <ConfirmDialog :isOpen="showModal" :widgetId="id" @update:isOpen="showModal = $event" />
+</client-only>
+
+  <div
+    @click="navigateTo(`/widget/${id}`)"
     class="border-2 border-black flex flex-col h-96 w-96 overflow-hidden relative cursor-pointer"
   >
     <img
@@ -24,11 +29,12 @@
       v-if="route.path === '/dashboard/my-widgets'"
       class="absolute bottom-2 right-2 space-x-2"
     >
-      <button @click.stop class="bg-black text-white p-2 rounded">
+      <button @click.stop="navigateTo(`/dashboard/edit-widget/${id}`)" class="bg-black text-white p-2 rounded">
         <IconsEdit />
       </button>
+      <!-- @click.stop="handleDeleteWidget(id)" -->
       <button
-        @click.stop="handleDeleteWidget(id)"
+      @click.stop="toggleModal"
         class="bg-red-700 text-white p-2 rounded"
       >
         <IconsDelete />
@@ -39,7 +45,11 @@
 
 <script setup>
 const route = useRoute();
-console.log(route.path);
+const showModal = ref(false);
+const toggleModal = () => {
+  showModal.value = !showModal.value;
+};
+
 
 const props = defineProps({
   id: {
@@ -64,14 +74,4 @@ const props = defineProps({
   },
 });
 
-// Handle delete widget
-const { delete: _delete } = useStrapi();
-
-const handleDeleteWidget = async (id) => {
-  try {
-    const response = await _delete("widgets", id);
-  } catch (error) {
-    console.error("Error:", error);
-  }
-};
 </script>
