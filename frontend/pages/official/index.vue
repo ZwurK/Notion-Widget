@@ -2,9 +2,9 @@
   <div>
     <div class="container mx-auto p-4">
       <div class="my-10">
-        <h1 class="text-3xl text-center mb-2">Notion, Reimagined by You.</h1>
+        <h1 class="text-3xl text-center mb-2">Notion workshop official widgets.</h1>
         <h1 class="text-md text-gray-500 text-center">
-          Thousands of widgets ready to use.
+          Search among premium beautiful widgets 100% customizable.
         </h1>
       </div>
       <form @submit.prevent="searchWidgets">
@@ -50,6 +50,7 @@ const searchWidgets = async (append = false) => {
   const response = await find("widgets", {
     populate: "image",
     _q: searchQuery.value,
+    filters: {type: "official"},
     pagination: {
       limit: itemsPerPage,
       start: (currentPage.value - 1) * itemsPerPage,

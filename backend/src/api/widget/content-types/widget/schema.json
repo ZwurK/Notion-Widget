@@ -43,6 +43,20 @@
       "relation": "manyToOne",
       "target": "plugin::users-permissions.user",
       "inversedBy": "widgets"
+    },
+    "customizations": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::customization.customization",
+      "mappedBy": "widget"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "official",
+        "community"
+      ],
+      "default": "community"
     }
   }
 }

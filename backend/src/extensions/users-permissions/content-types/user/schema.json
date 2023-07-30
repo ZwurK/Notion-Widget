@@ -71,6 +71,12 @@
       "relation": "oneToMany",
       "target": "api::widget.widget",
       "mappedBy": "author"
+    },
+    "customizations": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::customization.customization",
+      "mappedBy": "user"
     }
   }
 }
