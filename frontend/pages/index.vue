@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!-- Barre de recherche -->
     <div class="container mx-auto p-4">
       <div class="my-10">
         <h1 class="text-3xl text-center mb-2">Notion, Reimagined by You.</h1>

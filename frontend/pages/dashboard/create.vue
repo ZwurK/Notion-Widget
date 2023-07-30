@@ -112,6 +112,8 @@ const handleCreateWidget = async () => {
       timeout: 2000,
       toastClassName: "custom-toast",
     });
+
+    navigateTo("/dashboard/my-widgets");
   } catch (error) {
     const toast = useToast();
 

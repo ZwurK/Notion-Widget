@@ -49,16 +49,6 @@
           class="w-full p-2 border border-gray-300 rounded"
         />
       </div>
-      <div class="mb-4">
-        <label for="image" class="block mb-2 text-sm font-bold text-gray-600"
-          >Image:</label
-        >
-        <input
-          id="image"
-          type="file"
-          class="w-full p-2 border border-gray-300 rounded"
-        />
-      </div>
       <button
         @click="handleUpdateWidget"
         type="submit"
