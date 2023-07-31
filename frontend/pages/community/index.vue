@@ -50,7 +50,6 @@
     const response = await find("widgets", {
       populate: "image",
       _q: searchQuery.value,
-      filters: {type: "community"},
       pagination: {
         limit: itemsPerPage,
         start: (currentPage.value - 1) * itemsPerPage,

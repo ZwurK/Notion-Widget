@@ -4,7 +4,6 @@
 </client-only>
 
   <div
-    @click="navigateTo(`/widget/${id}`)"
     class="border-2 border-black flex flex-col h-96 w-96 overflow-hidden relative cursor-pointer"
   >
     <img

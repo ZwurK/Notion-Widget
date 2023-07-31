@@ -49,14 +49,6 @@
       "relation": "oneToMany",
       "target": "api::customization.customization",
       "mappedBy": "widget"
-    },
-    "type": {
-      "type": "enumeration",
-      "enum": [
-        "official",
-        "community"
-      ],
-      "default": "community"
     }
   }
 }

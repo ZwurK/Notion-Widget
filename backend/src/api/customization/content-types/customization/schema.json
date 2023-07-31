@@ -4,17 +4,15 @@
   "info": {
     "singularName": "customization",
     "pluralName": "customizations",
-    "displayName": "Customization"
+    "displayName": "Customization",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
   },
   "pluginOptions": {},
   "attributes": {
-    "uid": {
-      "type": "uid"
-    },
-    "user": {
+    "author": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "plugin::users-permissions.user",
@@ -25,6 +23,9 @@
       "relation": "manyToOne",
       "target": "api::widget.widget",
       "inversedBy": "customizations"
+    },
+    "settings": {
+      "type": "json"
     }
   }
 }

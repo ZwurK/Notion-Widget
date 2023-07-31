@@ -9,7 +9,7 @@
         :description="widget.attributes.description"
         :downloads="widget.attributes.downloads"
       />
-      <NuxtLink to="/dashboard/create" class="flex flex-col border-2 border-black border-dashed justify-center items-center h-96 w-96 overflow-hidden">
+      <NuxtLink to="/dashboard/choose" class="flex flex-col border-2 border-black border-dashed justify-center items-center h-96 w-96 overflow-hidden">
           <div class="w-48"><IconsPlus /></div>
         <p class="text-xl text-center">Create a new widget</p>
       </NuxtLink>

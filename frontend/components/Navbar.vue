@@ -4,7 +4,7 @@
       <div class="flex justify-between items-center py-4">
         <!-- Logo -->
         <NuxtLink to="/official" class="flex items-center gap-4">
-          <img class="w-10" src="/public/temp.png">
+          <img class="w-10" src="/temp.png">
           <span class="hidden md:block">Notion Workshop</span>
         </NuxtLink>
 

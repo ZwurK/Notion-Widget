@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   setInterval(updateClock, 1000);
-  updateClock(); // to initialize it immediately
+  updateClock();
 });
 </script>
 

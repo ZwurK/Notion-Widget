@@ -76,7 +76,7 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::customization.customization",
-      "mappedBy": "user"
+      "mappedBy": "author"
     }
   }
 }
