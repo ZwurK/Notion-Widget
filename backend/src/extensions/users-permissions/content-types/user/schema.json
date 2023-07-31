@@ -66,16 +66,16 @@
       "inversedBy": "users",
       "configurable": false
     },
-    "widgets": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::widget.widget",
-      "mappedBy": "author"
-    },
     "customizations": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::customization.customization",
+      "mappedBy": "author"
+    },
+    "widgets": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::community-widget.community-widget",
       "mappedBy": "author"
     }
   }

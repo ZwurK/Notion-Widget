@@ -28,10 +28,8 @@
             :title="widget.attributes.title"
             :image="widget.attributes.image.data.attributes.url"
             :description="widget.attributes.description"
-            :downloads="widget.attributes.downloads"
           />
         </div>
-        <button @click="loadMore" v-if="hasMore" class="mt-4">Load more</button>
       </div>
     </div>
   </template>
@@ -42,35 +40,13 @@
   const widgets = ref(null);
   const { find } = useStrapi();
   
-  const itemsPerPage = 10;
-  let currentPage = ref(1);
-  let hasMore = ref(true);
-  
   const searchWidgets = async (append = false) => {
-    const response = await find("widgets", {
+    const response = await find("community-widgets", {
       populate: "image",
       _q: searchQuery.value,
-      pagination: {
-        limit: itemsPerPage,
-        start: (currentPage.value - 1) * itemsPerPage,
-      },
     });
-  
-    if (append && widgets.value) {
-      widgets.value.data.push(...response.data);
-    } else {
-      widgets.value = response;
-    }
-  
-    if (response.data.length < itemsPerPage) {
-      hasMore.value = false;
-    } else {
-      currentPage.value++;
-    }
-  };
-  
-  const loadMore = async () => {
-    await searchWidgets(true);
+
+    widgets.value = response; 
   };
   
   onMounted(async () => {

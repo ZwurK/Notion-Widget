@@ -1,0 +1,39 @@
+{
+  "kind": "collectionType",
+  "collectionName": "official_widgets",
+  "info": {
+    "singularName": "official-widget",
+    "pluralName": "official-widgets",
+    "displayName": "Official Widget",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "richtext"
+    },
+    "customizations": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::customization.customization",
+      "mappedBy": "widget"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    }
+  }
+}

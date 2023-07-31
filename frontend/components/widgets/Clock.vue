@@ -1,45 +1,45 @@
 <template>
-  <div class="clock">
-    <span id="hours"></span>:<span id="minutes"></span>:<span
-      id="seconds"
-    ></span>
+  <div class="flex items-center justify-center h-screen bg-transparent">
+    <div class="bg-white p-4 px-8 rounded-xl shadow-md" :class="backgroundColor textSize">
+      <span>{{ hours }}</span>:<span>{{ minutes }}</span>:<span>{{ seconds }}</span>
+    </div>
   </div>
 </template>
 
 <script setup>
-document.addEventListener("DOMContentLoaded", function () {
-  function updateClock() {
-    const now = new Date();
+import { ref, onMounted, onUnmounted } from 'vue';
 
-    const hours = now.getHours().toString().padStart(2, "0");
-    const minutes = now.getMinutes().toString().padStart(2, "0");
-    const seconds = now.getSeconds().toString().padStart(2, "0");
-
-    document.getElementById("hours").textContent = hours;
-    document.getElementById("minutes").textContent = minutes;
-    document.getElementById("seconds").textContent = seconds;
+const props = defineProps({
+  backgroundColor: {
+    type: String,
+    default: 'bg-white'
+  },
+  textSize: {
+    type: String,
+    default: 'text-4xl'
   }
+});
 
-  setInterval(updateClock, 1000);
+let hours = ref('00');
+let minutes = ref('00');
+let seconds = ref('00');
+
+const updateClock = () => {
+  const now = new Date();
+  hours.value = now.getHours().toString().padStart(2, "0");
+  minutes.value = now.getMinutes().toString().padStart(2, "0");
+  seconds.value = now.getSeconds().toString().padStart(2, "0");
+};
+
+let intervalId;
+
+onMounted(() => {
+  intervalId = setInterval(updateClock, 1000);
   updateClock();
 });
+
+onUnmounted(() => {
+  clearInterval(intervalId);
+});
+
 </script>
-
-<style scoped>
-body {
-  font-family: Arial, sans-serif;
-  display: flex;
-  height: 100vh;
-  align-items: center;
-  justify-content: center;
-  background-color: #191919;
-}
-
-.clock {
-  font-size: 2rem;
-  background-color: #fff;
-  padding: 15px 30px;
-  border-radius: 15px;
-  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
-}
-</style>

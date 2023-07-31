@@ -1,0 +1,42 @@
+{
+  "kind": "collectionType",
+  "collectionName": "community_widgets",
+  "info": {
+    "singularName": "community-widget",
+    "pluralName": "community-widgets",
+    "displayName": "Community Widget",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "richtext"
+    },
+    "author": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "widgets"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "code": {
+      "type": "richtext"
+    }
+  }
+}

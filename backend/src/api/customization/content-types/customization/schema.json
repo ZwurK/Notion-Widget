@@ -18,14 +18,14 @@
       "target": "plugin::users-permissions.user",
       "inversedBy": "customizations"
     },
+    "settings": {
+      "type": "json"
+    },
     "widget": {
       "type": "relation",
       "relation": "manyToOne",
-      "target": "api::widget.widget",
+      "target": "api::official-widget.official-widget",
       "inversedBy": "customizations"
-    },
-    "settings": {
-      "type": "json"
     }
   }
 }
