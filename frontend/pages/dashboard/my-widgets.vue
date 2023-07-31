@@ -27,10 +27,9 @@ const { find } = useStrapi();
 const userWidgetsId = user.value
   ? user.value.widgets.map((widget) => widget.id)
   : [];
-console.log(userWidgetsId);
 
 if (userWidgetsId.length) {
-  const response = await find("widgets", {
+  const response = await find("community-widgets", {
     populate: "image",
     filters: {
       id: { $in: userWidgetsId },
@@ -38,7 +37,6 @@ if (userWidgetsId.length) {
   });
 
   widgets.value = response.data;
-  console.log(response);
 }
 
 definePageMeta({

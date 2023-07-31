@@ -45,10 +45,15 @@
 </template>
 
 <script setup>
+
+import { useWidgetStore } from '~/store/widget';
+const widgetStore = useWidgetsStore();
+
 const showWidgets = ref(false);
 const user = useStrapiUser();
 const widgets = ref(null);
 const { find, create } = useStrapi();
+
 
 const handleCreateCustomization = async (widgetId) => {
   try {
@@ -56,8 +61,8 @@ const handleCreateCustomization = async (widgetId) => {
         author: user.value.id,
         widget: widgetId
     });
-    console.log(response)
     if (response && response.data.id) {
+      widgetStore.selectWidget(widgetId);
       navigateTo(`/dashboard/custom-widget/${response.data.id}`);
     } else {
       console.error("Error : UUID lacking");
@@ -69,7 +74,7 @@ const handleCreateCustomization = async (widgetId) => {
 
 const searchWidgets = async () => {
   try {
-    const response = await find("widgets", {
+    const response = await find("official-widgets", {
       populate: "image",
       filters: { type: "official" },
     });

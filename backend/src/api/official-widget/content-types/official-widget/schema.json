@@ -34,6 +34,9 @@
         "videos",
         "audios"
       ]
+    },
+    "customizable_fields": {
+      "type": "json"
     }
   }
 }
