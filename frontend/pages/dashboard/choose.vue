@@ -29,7 +29,7 @@
     <div v-if="widgets && showWidgets">
       <h1 class="text-center text-2xl my-10">Choose a widget to custom</h1>
       <div class="flex flex-wrap gap-4 mt-10">
-        <div @click="handleCreateCustomization(widget.id)" v-for="widget in widgets.data"> 
+        <div @click="handleCreateCustomization(widget.id, widget.attributes.title)" v-for="widget in widgets.data"> 
           <WidgetCard
           :key="widget.id"
           :id="widget.id"
@@ -47,7 +47,7 @@
 <script setup>
 
 import { useWidgetStore } from '~/store/widget';
-const widgetStore = useWidgetsStore();
+const widgetStore = useWidgetStore();
 
 const showWidgets = ref(false);
 const user = useStrapiUser();
@@ -55,14 +55,14 @@ const widgets = ref(null);
 const { find, create } = useStrapi();
 
 
-const handleCreateCustomization = async (widgetId) => {
+const handleCreateCustomization = async (widgetId, widgetTitle) => {
   try {
     const response = await create('customizations', {
         author: user.value.id,
         widget: widgetId
     });
     if (response && response.data.id) {
-      widgetStore.selectWidget(widgetId);
+      widgetStore.selectWidget({id: widgetId, name: widgetTitle});
       navigateTo(`/dashboard/custom-widget/${response.data.id}`);
     } else {
       console.error("Error : UUID lacking");

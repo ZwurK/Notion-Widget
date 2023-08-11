@@ -1,40 +1,31 @@
 <template>
-    <div class="p-4">
-      <!-- Aperçu du widget -->
-      <div :style="widgetStyles" class="p-4 border rounded">
-        Texte du widget
-      </div>
-  
-      <!-- Interface de personnalisation -->
-      <div class="customization-panel mt-4 space-y-4">
-        <div>
-          <label for="textColor" class="block mb-2">Couleur du texte:</label>
-          <input type="color" v-model="textColor" id="textColor" class="border rounded p-1">
-        </div>
-        <div>
-          <label for="textSize" class="block mb-2">Taille du texte:</label>
-          <input type="range" v-model="textSize" min="12" max="48" id="textSize" class="w-full">
-        </div>
-      </div>
+  <div class="p-4 flex flex-col">
+    <div v-for="prop in widgetStore.editableProps" :key="prop.name">
+      <label :for="prop.name">{{ prop.name }}</label>
+      <input
+        :id="prop.name"
+        :value="prop.value"
+        @change="updateProp(prop.name, $event.target.value)"
+      />
     </div>
-  </template>
-  
-  <script>
-  export default {
-    data() {
-      return {
-        textColor: '#000000',
-        textSize: '16'
-      };
-    },
-    computed: {
-      widgetStyles() {
-        return {
-          color: this.textColor,
-          fontSize: `${this.textSize}px`
-        };
-      }
-    }
-  };
-  </script>
-  
+    <button @click="saveCustomization" class="w-full py-2 px-4 bg-black text-white rounded">Save</button>
+  </div>
+</template>
+
+<script setup>
+import { useWidgetStore } from "~/store/widget";
+const widgetStore = useWidgetStore();
+const { update } = useStrapi();
+const route = useRoute();
+
+function updateProp(name, value) {
+  widgetStore.updatePropValue(name, value);
+  console.log(widgetStore.editableProps);
+}
+
+const saveCustomization = async () => {
+  await update('customizations', route.params.id, { settings: widgetStore.editableProps })
+}
+
+
+</script>

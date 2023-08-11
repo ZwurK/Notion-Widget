@@ -1,28 +1,23 @@
 <template>
-  <div class="flex items-center justify-center h-screen bg-transparent">
-    <div class="bg-white p-4 px-8 rounded-xl shadow-md" :class="backgroundColor textSize">
-      <span>{{ hours }}</span>:<span>{{ minutes }}</span>:<span>{{ seconds }}</span>
+  <div
+    class="flex items-center justify-center h-screen"
+    :class="computedClasses('container')"
+  >
+    <div
+      class="bg-white p-4 px-8 rounded-xl shadow-md"
+      :class="computedClasses('font')"
+    >
+      <span>{{ hours }}</span
+      >:<span>{{ minutes }}</span
+      >:<span>{{ seconds }}</span>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue';
-
-const props = defineProps({
-  backgroundColor: {
-    type: String,
-    default: 'bg-white'
-  },
-  textSize: {
-    type: String,
-    default: 'text-4xl'
-  }
-});
-
-let hours = ref('00');
-let minutes = ref('00');
-let seconds = ref('00');
+let hours = ref("00");
+let minutes = ref("00");
+let seconds = ref("00");
 
 const updateClock = () => {
   const now = new Date();
@@ -42,4 +37,25 @@ onUnmounted(() => {
   clearInterval(intervalId);
 });
 
+// Customization system
+
+import { useWidgetStore } from "~/store/widget";
+const widgetStore = useWidgetStore();
+
+const props = defineProps(["customization"]);
+if (props.customization) {
+  widgetStore.setEditableProps(props.customization);
+} else {
+  const editableProps = [
+    { target: "font", name: "color", value: "text-red-500" },
+    { target: "container", name: "background color", value: "bg-white" },
+  ];
+  widgetStore.setEditableProps(editableProps);
+}
+
+function computedClasses(target) {
+  return widgetStore.editableProps
+    .filter((p) => p.target === target)
+    .map((p) => p.value);
+}
 </script>

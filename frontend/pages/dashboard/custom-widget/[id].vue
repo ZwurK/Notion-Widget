@@ -1,29 +1,21 @@
-<template>
-  <div class="relative">    
+<template>   
     <CustomizationPanel />
-  </div>
+    <component :is="currentComponent" v-if="currentComponent" />
 </template>
 
 <script setup>
-const iframeCode = ref(null);
-const route = useRoute();
-const { findOne } = useStrapi();
 
-const updateCode = (code) => {
-  iframeCode.value = code;
-};
+import { useWidgetStore } from '~/store/widget';
+const widgetStore = useWidgetStore();
+let currentComponent;
+switch (widgetStore.selectedWidget.name) {
+  case "Clock":
+    currentComponent = resolveComponent("WidgetsClock");
+    break;
+}
 
-onMounted(async () => {
-  try {
-    const customization = await findOne("customizations", route.params.id, {
-      populate: "widget",
-    });
-    const codeToGenerate =
-      customization.data.attributes.widget.data.attributes.code;
-    console.log(codeToGenerate);
-    updateCode(codeToGenerate);
-  } catch (error) {
-    console.error("Error:", error);
-  }
-});
+
+
+
+
 </script>

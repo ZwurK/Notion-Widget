@@ -34,9 +34,6 @@ console.log(userWidgetsId);
 if (userWidgetsId.length) {
   const response = await find("widgets", {
     populate: "image",
-    filters: {
-      id: { $in: userWidgetsId },
-    },
   });
 
   widgets.value = response.data;

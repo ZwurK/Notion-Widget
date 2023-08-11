@@ -26,6 +26,11 @@
       "relation": "manyToOne",
       "target": "api::official-widget.official-widget",
       "inversedBy": "customizations"
+    },
+    "uid": {
+      "type": "string",
+      "required": true,
+      "unique": true
     }
   }
 }

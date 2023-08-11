@@ -4,7 +4,8 @@ export const useWidgetStore = defineStore({
   id: 'widget',
 
   state: () => ({
-    selectedWidgetId: null
+    selectedWidget: null,
+    editableProps: []
   }),
 
   getters: {
@@ -12,12 +13,20 @@ export const useWidgetStore = defineStore({
   },
 
   actions: {
-    selectWidget(widgetId) {
-      this.selectedWidgetId = widgetId;
+    selectWidget(widget) {
+      this.selectedWidget = widget;
     },
-
     deselectWidget() {
-      this.selectedWidgetId = null;
+      this.selectedWidget = null;
+    },
+    setEditableProps(props) {
+      this.editableProps = props;
+    },
+    updatePropValue(name, newValue) {
+      const prop = this.editableProps.find(p => p.name === name);
+      if (prop) {
+        prop.value = newValue;
+      }
     }
   }
 });

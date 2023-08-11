@@ -48,6 +48,7 @@ const searchWidgets = async (append = false) => {
   });
 
   widgets.value = response; 
+  console.log(response)
 };
 
 onMounted(async () => {

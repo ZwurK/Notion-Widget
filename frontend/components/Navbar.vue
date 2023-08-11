@@ -3,14 +3,14 @@
     <div class="container mx-auto px-4">
       <div class="flex justify-between items-center py-4">
         <!-- Logo -->
-        <NuxtLink to="/official" class="flex items-center gap-4">
+        <NuxtLink to="/" class="flex items-center gap-4">
           <img class="w-10" src="/temp.png">
           <span class="hidden md:block">Notion Workshop</span>
         </NuxtLink>
 
         <!-- Links for large screens -->
         <div class="hidden sm:flex space-x-4">
-          <NuxtLink to="/official" class="text-black hover:text-gray-600">
+          <NuxtLink to="/" class="text-black hover:text-gray-600">
             Official
           </NuxtLink>
           <NuxtLink to="/community" class="text-black hover:text-gray-600">
@@ -43,7 +43,7 @@
 
       <!-- Mobile menu -->
       <div v-if="isMenuOpen" class="md:hidden">
-        <NuxtLink to="/official" class="block px-4 py-2 hover:bg-gray-200">
+        <NuxtLink to="/" class="block px-4 py-2 hover:bg-gray-200">
           Official
         </NuxtLink>
         <NuxtLink to="/community" class="block px-4 py-2 hover:bg-gray-200">
