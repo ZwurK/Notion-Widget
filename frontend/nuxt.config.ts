@@ -19,7 +19,7 @@ export default defineNuxtConfig({
 
   strapi: {
     auth: {
-      populate: ['widgets']
+      populate: ['widgets', 'customizations']
     }
   },
 
