@@ -36,19 +36,30 @@
 </template>
 
 <script setup>
+
+import { useToast } from "vue-toastification";
+const toast = useToast();
   
 let searchQuery = ref("");
 const widgets = ref(null);
 const { find } = useStrapi();
 
 const searchWidgets = async (append = false) => {
-  const response = await find("official-widgets", {
-    populate: "image",
-    _q: searchQuery.value,
-  });
+  try {
+    const response = await find("official-widgets", {
+      populate: "image",
+      _q: searchQuery.value,
+    });
 
-  widgets.value = response; 
-  console.log(response)
+    widgets.value = response; 
+    console.log(response);
+  } catch (error) {
+    console.error(error);
+    toast.error('An error has occurred, please try again.', {
+      timeout: 2000,
+      toastClassName: "custom-toast",
+    });
+  }
 };
 
 onMounted(async () => {

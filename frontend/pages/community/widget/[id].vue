@@ -27,7 +27,7 @@ onMounted(async () => {
     const codeToGenerate = widget.data.attributes.code;
     updateCode(codeToGenerate);
   } catch (error) {
-    console.error("Error:", error);
+    console.error(error);
   }
 });
 

@@ -46,6 +46,9 @@
 
 <script setup>
 
+import { useToast } from "vue-toastification";
+const toast = useToast();
+
 import { useWidgetStore } from '~/store/widget';
 const widgetStore = useWidgetStore();
 
@@ -68,7 +71,11 @@ const handleCreateCustomization = async (widgetId, widgetTitle) => {
       console.error("Error : UUID lacking");
     }
   } catch (error) {
-    console.error("Error:", error);
+    console.error(error);
+    toast.error('An error has occurred, please try again.', {
+      timeout: 2000,
+      toastClassName: "custom-toast",
+    });
   }
 }
 
@@ -80,7 +87,11 @@ const searchWidgets = async () => {
     });
     widgets.value = response;
   } catch (error) {
-    console.error("Error fetching widgets:", error);
+    console.error(error);
+    toast.error('An error has occurred, please try again.', {
+      timeout: 2000,
+      toastClassName: "custom-toast",
+    });
   }
 };
 

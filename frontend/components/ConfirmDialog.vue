@@ -44,6 +44,7 @@
 
 <script setup>
 import { useToast } from "vue-toastification";
+const toast = useToast();
 
 const props = defineProps({
   isOpen: {
@@ -76,14 +77,17 @@ const handleDeleteWidget = async () => {
       const response = await _delete("customizations", props.widgetId);
     }
     closeModal();
-    const toast = useToast();
 
     toast.success("Widget successfully deleted.", {
       timeout: 2000,
       toastClassName: "custom-toast",
     });
   } catch (error) {
-    console.error("Error:", error);
+    console.error(error);
+    toast.error('An error has occurred, please try again.', {
+      timeout: 2000,
+      toastClassName: "custom-toast",
+    });
   }
 };
 

@@ -75,6 +75,7 @@
 
 <script setup>
 import { useToast } from "vue-toastification";
+const toast = useToast();
 
 const user = useStrapiUser();
 const client = useStrapiClient();
@@ -106,8 +107,6 @@ const handleCreateWidget = async () => {
       body: formData,
     });
 
-    const toast = useToast();
-
     toast.success("Widget successfully created.", {
       timeout: 2000,
       toastClassName: "custom-toast",
@@ -115,9 +114,8 @@ const handleCreateWidget = async () => {
 
     navigateTo("/dashboard/my-widgets");
   } catch (error) {
-    const toast = useToast();
-
-    toast.error(error.error.message, {
+    console.error(error);
+    toast.error('An error has occurred, please try again.', {
       timeout: 2000,
       toastClassName: "custom-toast",
     });

@@ -70,6 +70,7 @@
 
 <script setup>
 import { useToast } from "vue-toastification";
+const toast = useToast();
 
 // Fetch user data
 
@@ -91,14 +92,12 @@ const handleChangePassword = async () => {
       password: passwordConfirmation.value,
       passwordConfirmation: currentPassword.value,
     });
-    const toast = useToast();
 
     toast.success("Password successfully changed", {
       timeout: 2000,
       toastClassName: "custom-toast",
     });
   } catch (error) {
-    const toast = useToast();
 
     toast.error(error.error.message, {
       timeout: 2000,

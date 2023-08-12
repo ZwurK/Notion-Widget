@@ -62,6 +62,7 @@
 
 <script setup>
 import { useToast } from "vue-toastification";
+const toast = useToast();
 
 const route = useRoute();
 
@@ -81,16 +82,14 @@ const handleUpdateWidget = async () => {
       code: widgetData.value.code,
       price: widgetData.value.price,
     });
-    const toast = useToast();
 
     toast.success("Widget successfully changed.", {
       timeout: 2000,
       toastClassName: "custom-toast",
     });
   } catch (error) {
-    const toast = useToast();
-
-    toast.error(error.error.message, {
+    console.error(error);
+    toast.error('An error has occurred, please try again.', {
       timeout: 2000,
       toastClassName: "custom-toast",
     });
@@ -110,7 +109,11 @@ onMounted(async () => {
     widgetData.value.price = widget.data.attributes.price;
     console.log(widget);
   } catch (error) {
-    console.error("Error:", error);
+    console.error(error);
+    toast.error('An error has occurred, please try again.', {
+      timeout: 2000,
+      toastClassName: "custom-toast",
+    });
   }
 });
 

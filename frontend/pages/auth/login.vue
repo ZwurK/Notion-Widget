@@ -44,7 +44,7 @@
 
 <script setup>
 import { useToast } from "vue-toastification";
-
+const toast = useToast();
 const { login } = useStrapiAuth();
 
 const email = ref("");
@@ -54,15 +54,12 @@ const handleLogin = async () => {
   try {
     await login({ identifier: email.value, password: password.value });
 
-    const toast = useToast();
-
     toast.success("You have successfully logged in.", {
       timeout: 2000,
       toastClassName: "custom-toast",
     });
     navigateTo("/");
   } catch (error) {
-    const toast = useToast();
 
     toast.error(error.error.message, {
       timeout: 2000,

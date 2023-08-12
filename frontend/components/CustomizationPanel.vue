@@ -22,7 +22,11 @@
         >{{ prop.name }}</label
       >
       <input
-        :class="prop.type == 'color' ? 'block mb-2 text-sm font-bold text-gray-600' : ''"
+        :class="
+          prop.type == 'color'
+            ? 'block mb-2 text-sm font-bold text-gray-600'
+            : ''
+        "
         :id="prop.name"
         :value="prop.value"
         :type="prop.type"
@@ -39,6 +43,10 @@
 </template>
 
 <script setup>
+
+import { useToast } from "vue-toastification";
+const toast = useToast();
+
 import { useWidgetStore } from "~/store/widget";
 const widgetStore = useWidgetStore();
 const { update } = useStrapi();
@@ -59,7 +67,11 @@ const saveCustomization = async () => {
         settings: widgetStore.editableProps,
       });
     } catch (error) {
-      console.log(error);
+      console.error(error);
+      toast.error("An error has occurred, please try again.", {
+        timeout: 2000,
+        toastClassName: "custom-toast",
+      });
     }
   } else {
     console.log("You have to set a title.");
@@ -70,6 +82,6 @@ const props = defineProps({
   currentTitle: {
     type: String,
     required: true,
-  }
+  },
 });
 </script>

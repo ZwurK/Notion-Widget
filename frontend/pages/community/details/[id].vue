@@ -135,17 +135,26 @@
 </template>
 
 <script setup>
-
-
-import { useClipboard } from '@vueuse/core'
+import { useClipboard } from '@vueuse/core';
+import { useToast } from "vue-toastification";
+const toast = useToast();
 
 const route = useRoute();
 const { findOne } = useStrapi();
-const widget = await findOne("widgets", route.params.id, { populate: "*" });
+const widget = ref(null);
 
-const config = useRuntimeConfig()
-const link = config.public.domain + '/widget/live/' + widget.data.id;
-console.log(link)
-const { copy } = useClipboard({ link })
+try {
+  widget.value = await findOne("widgets", route.params.id, { populate: "*" });
+} catch (error) {
+  console.error(error);
+  toast.error('An error has occurred, please try again.', {
+      timeout: 2000,
+      toastClassName: "custom-toast",
+    });
+}
 
+const config = useRuntimeConfig();
+const link = config.public.domain + '/widget/live/' + (widget.value ? widget.value.data.id : '');
+console.log(link);
+const { copy } = useClipboard({ link });
 </script>

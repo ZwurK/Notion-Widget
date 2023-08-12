@@ -38,7 +38,9 @@
 </template>
 
 <script setup>
-// Display user's widgets
+
+import { useToast } from "vue-toastification";
+const toast = useToast();
 
 const widgets = ref(null);
 const customizations = ref(null);
@@ -50,13 +52,21 @@ const userWidgetsId = user.value
   : [];
 
 if (userWidgetsId.length) {
-  const communityWidgets = await find("community-widgets", {
-    populate: "image",
-    filters: {
-      id: { $in: userWidgetsId },
-    },
-  });
-  widgets.value = communityWidgets.data;
+  try {
+    const communityWidgets = await find("community-widgets", {
+      populate: "image",
+      filters: {
+        id: { $in: userWidgetsId },
+      },
+    });
+    widgets.value = communityWidgets.data;
+  } catch (error) {
+    console.error(error);
+    toast.error('An error has occurred, please try again.', {
+      timeout: 2000,
+      toastClassName: "custom-toast",
+    });
+  }
 }
 
 const userCustomizationsId = user.value
@@ -64,14 +74,22 @@ const userCustomizationsId = user.value
   : [];
 
 if (userCustomizationsId.length) {
-  const WidgetCustomizations = await find("customizations", {
-    populate: { widget: { populate: ["image"] } },
-    filters: {
-      id: { $in: userCustomizationsId },
-    },
-  });
-  customizations.value = WidgetCustomizations.data;
-  console.log(customizations.value);
+  try {
+    const WidgetCustomizations = await find("customizations", {
+      populate: { widget: { populate: ["image"] } },
+      filters: {
+        id: { $in: userCustomizationsId },
+      },
+    });
+    customizations.value = WidgetCustomizations.data;
+    console.log(customizations.value);
+  } catch (error) {
+    console.error(error);
+    toast.error('An error has occurred, please try again.', {
+      timeout: 2000,
+      toastClassName: "custom-toast",
+    });
+  }
 }
 
 definePageMeta({

@@ -18,25 +18,36 @@
 </template>
 
 <script setup>
+import { useToast } from "vue-toastification";
+const toast = useToast();
+
 const widgets = ref(null);
 const route = useRoute();
 const { findOne, find } = useStrapi();
 
-const user = await findOne("users", route.params.id, {
-  populate: "widgets",
-});
-
-console.log(user);
-
-const userWidgetsId = user ? user.widgets.map((widget) => widget.id) : [];
-console.log(userWidgetsId);
-
-if (userWidgetsId.length) {
-  const response = await find("widgets", {
-    populate: "image",
+try {
+  const user = await findOne("users", route.params.id, {
+    populate: "widgets",
   });
 
-  widgets.value = response.data;
-  console.log(response);
+  console.log(user);
+
+  const userWidgetsId = user ? user.widgets.map((widget) => widget.id) : [];
+  console.log(userWidgetsId);
+
+  if (userWidgetsId.length) {
+    const response = await find("widgets", {
+      populate: "image",
+    });
+
+    widgets.value = response.data;
+    console.log(response);
+  }
+} catch (error) {
+  console.error(error);
+  toast.error("An error has occurred, please try again.", {
+    timeout: 2000,
+    toastClassName: "custom-toast",
+  });
 }
 </script>
