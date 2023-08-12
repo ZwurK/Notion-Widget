@@ -1,7 +1,7 @@
 <template>
   <div class="p-4 flex flex-col bg-gray-100 border-e gap-4">
     <div>
-      <label for="title" class="block mb-2 text-sm font-bold text-gray-600"
+      <label for="title" class="block mb-2 text-md font-bold text-gray-600"
         >Title:</label
       >
       <input
@@ -22,9 +22,10 @@
         >{{ prop.name }}</label
       >
       <input
-        class="w-full p-2 border border-gray-300 rounded"
+        :class="prop.type == 'color' ? 'block mb-2 text-sm font-bold text-gray-600' : ''"
         :id="prop.name"
         :value="prop.value"
+        :type="prop.type"
         @change="updateProp(prop.name, $event.target.value)"
       />
     </div>

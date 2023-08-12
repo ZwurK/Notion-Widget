@@ -11,7 +11,9 @@
     ></div>
 
     <!-- Modale -->
-    <DialogPanel class="bg-white border-2 border-black rounded p-6 max-w-xl mx-auto z-10">
+    <DialogPanel
+      class="bg-white border-2 border-black rounded p-6 max-w-xl mx-auto z-10"
+    >
       <DialogTitle class="text-xl font-semibold mb-4"
         >Delete a widget</DialogTitle
       >
@@ -19,7 +21,8 @@
         This action is irrevocable.
       </DialogDescription>
       <p class="mb-4">
-        Are you sure you want to delete this widget? Its data will be permanently deleted.
+        Are you sure you want to delete this widget? Its data will be
+        permanently deleted.
       </p>
       <div class="flex justify-end space-x-4">
         <button
@@ -28,7 +31,8 @@
         >
           Cancel
         </button>
-        <button @click="handleDeleteWidget"
+        <button
+          @click="handleDeleteWidget"
           class="px-4 py-2 bg-red-700 text-white rounded"
         >
           Delete
@@ -39,38 +43,45 @@
 </template>
 
 <script setup>
-
 import { useToast } from "vue-toastification";
 
 const props = defineProps({
   isOpen: {
     type: Boolean,
-    required: true
+    required: true,
   },
   widgetId: {
     type: Number,
-    required: true
-  }
+    required: true,
+  },
+  type: {
+    type: String,
+    required: true,
+  },
 });
 
-const emit = defineEmits(['update:isOpen']);
+const emit = defineEmits(["update:isOpen"]);
 
 function closeModal() {
-  emit('update:isOpen', false);
+  emit("update:isOpen", false);
 }
 
 const { delete: _delete } = useStrapi();
 
 const handleDeleteWidget = async () => {
   try {
-    const response = await _delete("widgets", props.widgetId);
+    if(props.type == "community-widget") {
+      const response = await _delete("widgets", props.widgetId);
+    } else {
+      const response = await _delete("customizations", props.widgetId);
+    }
     closeModal();
     const toast = useToast();
 
-toast.success("Widget successfully deleted.", {
-  timeout: 2000,
-  toastClassName: "custom-toast",
-});
+    toast.success("Widget successfully deleted.", {
+      timeout: 2000,
+      toastClassName: "custom-toast",
+    });
   } catch (error) {
     console.error("Error:", error);
   }

@@ -7,16 +7,6 @@ export default defineNuxtConfig({
 
   css: ['~/assets/css/main.css'],
 
-  tailwindcss: {
-    config: {
-      purge: {
-        options: {
-          safelist: ["text-4xl", "bg-red-500"],
-        }
-      }
-    }
-  },
-
   strapi: {
     auth: {
       populate: ['widgets', 'customizations']

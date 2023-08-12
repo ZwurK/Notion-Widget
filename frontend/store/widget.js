@@ -4,7 +4,6 @@ export const useWidgetStore = defineStore({
   id: 'widget',
 
   state: () => ({
-    selectedWidget: null,
     editableProps: []
   }),
 
@@ -13,12 +12,6 @@ export const useWidgetStore = defineStore({
   },
 
   actions: {
-    selectWidget(widget) {
-      this.selectedWidget = widget;
-    },
-    deselectWidget() {
-      this.selectedWidget = null;
-    },
     setEditableProps(props) {
       this.editableProps = props;
     },

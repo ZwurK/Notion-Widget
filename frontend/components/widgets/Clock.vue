@@ -1,11 +1,11 @@
 <template>
   <div
     class="flex items-center justify-center h-screen"
-    :class="computedClasses('container')"
+    :style="'background-color: ' + computedClasses('container') + ';'"
   >
     <div
       class="bg-white p-4 px-8 rounded-xl shadow-md"
-      :class="computedClasses('font')"
+      :style="'color: ' + computedClasses('font') + ';'"
     >
       <span>{{ hours }}</span
       >:<span>{{ minutes }}</span
@@ -47,8 +47,8 @@ if (props.customization) {
   widgetStore.setEditableProps(props.customization);
 } else {
   const editableProps = [
-    { target: "font", name: "color", value: "text-red-500" },
-    { target: "container", name: "background color", value: "bg-white" },
+    { target: "font", name: "Text color", type: "color", value: "text-red-500" },
+    { target: "container", name: "Background color", type: "color", value: "bg-white" },
   ];
   widgetStore.setEditableProps(editableProps);
 }

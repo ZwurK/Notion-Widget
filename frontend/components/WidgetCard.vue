@@ -1,6 +1,6 @@
 <template>
 <client-only>
-  <ConfirmDialog :isOpen="showModal" :widgetId="id" @update:isOpen="showModal = $event" />
+  <ConfirmDialog :type="type" :isOpen="showModal" :widgetId="id" @update:isOpen="showModal = $event" />
 </client-only>
 
   <div
@@ -31,7 +31,6 @@
     <button @click.stop='navigateTo(type == "community-widget" ? `/dashboard/edit-widget/${id}` : `/dashboard/custom-widget/${id}`)' class="bg-black text-white p-2 rounded">
         <IconsEdit />
       </button>
-      <!-- @click.stop="handleDeleteWidget(id)" -->
       <button
       @click.stop="toggleModal"
         class="bg-red-700 text-white p-2 rounded"
