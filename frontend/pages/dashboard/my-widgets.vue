@@ -10,6 +10,7 @@
         :image="widget.attributes.image.data.attributes.url"
         :description="widget.attributes.description"
         :downloads="widget.attributes.downloads"
+        type="community-widget"
       />
       <WidgetCard
         v-for="customization in customizations"
@@ -23,6 +24,7 @@
         "
         description="An official widget"
         :downloads="0"
+        type="customization"
       />
       <NuxtLink
         to="/dashboard/choose"

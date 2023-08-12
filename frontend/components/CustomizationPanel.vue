@@ -5,7 +5,7 @@
         >Title:</label
       >
       <input
-        v-model="currentPassword"
+        v-model="title"
         id="title"
         type="text"
         class="w-full p-2 border border-gray-300 rounded"
@@ -43,7 +43,7 @@ const widgetStore = useWidgetStore();
 const { update } = useStrapi();
 const route = useRoute();
 
-const title = ref(null);
+const title = ref(props.currentTitle ?? null);
 
 function updateProp(name, value) {
   widgetStore.updatePropValue(name, value);
@@ -64,4 +64,11 @@ const saveCustomization = async () => {
     console.log("You have to set a title.");
   }
 };
+
+const props = defineProps({
+  currentTitle: {
+    type: String,
+    required: true,
+  }
+});
 </script>

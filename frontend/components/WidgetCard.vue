@@ -28,7 +28,7 @@
       v-if="route.path === '/dashboard/my-widgets'"
       class="absolute bottom-2 right-2 space-x-2"
     >
-      <button @click.stop="navigateTo(`/dashboard/edit-widget/${id}`)" class="bg-black text-white p-2 rounded">
+    <button @click.stop='navigateTo(type == "community-widget" ? `/dashboard/edit-widget/${id}` : `/dashboard/custom-widget/${id}`)' class="bg-black text-white p-2 rounded">
         <IconsEdit />
       </button>
       <!-- @click.stop="handleDeleteWidget(id)" -->
@@ -74,6 +74,10 @@ const props = defineProps({
   downloads: {
     type: Number,
     default: 0,
+  },
+  type: {
+    type: String,
+    default: "community-widget",
   },
 });
 

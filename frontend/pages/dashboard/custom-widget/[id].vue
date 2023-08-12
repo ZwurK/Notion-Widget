@@ -1,6 +1,6 @@
 <template>
-  <div class="flex w-full">
-    <CustomizationPanel class="flex-none w-1/3" />
+  <div class="flex w-full" v-if="!pending && customization">
+    <CustomizationPanel :currentTitle="customization.attributes.title" class="flex-none w-1/3" />
     <component
       :is="currentComponent"
       v-if="currentComponent"
@@ -10,10 +10,22 @@
 </template>
 
 <script setup>
-import { useWidgetStore } from "~/store/widget";
-const widgetStore = useWidgetStore();
+const { findOne } = useStrapi();
+const route = useRoute();
+const customization = ref(null)
+
+const { data, pending, refresh, error } = await useAsyncData(
+  "customization",
+  () =>
+    findOne("customizations", route.params.id, {
+      populate: "widget",
+    })
+);
+
+customization.value = data.value.data
+
 let currentComponent;
-switch (widgetStore.selectedWidget.name) {
+switch (customization.value.attributes.widget.data.attributes.title) {
   case "Clock":
     currentComponent = resolveComponent("WidgetsClock");
     break;

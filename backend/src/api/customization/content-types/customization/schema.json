@@ -28,7 +28,8 @@
       "inversedBy": "customizations"
     },
     "title": {
-      "type": "string"
+      "type": "string",
+      "default": "Nameless widget"
     }
   }
 }
