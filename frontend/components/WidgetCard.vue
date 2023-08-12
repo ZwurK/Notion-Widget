@@ -4,7 +4,7 @@
 </client-only>
 
   <div
-    class="border-2 border-black flex flex-col h-96 w-96 overflow-hidden relative cursor-pointer"
+    class="border-2 border-black flex flex-col h-96 w-96 overflow-hidden relative cursor-pointer" @click="navigateTo(link)"
   >
     <img
       :src="'http://localhost:1337' + image"
@@ -60,6 +60,10 @@ const props = defineProps({
     required: true,
   },
   title: {
+    type: String,
+    required: true,
+  },
+  link: {
     type: String,
     required: true,
   },
