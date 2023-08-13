@@ -44,11 +44,12 @@
 
 <script setup>
 
+import { useWidgetStore } from "~/store/widget";
+const widgetStore = useWidgetStore();
+
 import { useToast } from "vue-toastification";
 const toast = useToast();
 
-import { useWidgetStore } from "~/store/widget";
-const widgetStore = useWidgetStore();
 const { update } = useStrapi();
 const route = useRoute();
 
