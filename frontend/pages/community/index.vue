@@ -23,14 +23,18 @@
       <NuxtLink
         v-for="widget in widgets.data"
         :key="widget.id"
-        :to="'/community/widget/'+widget.id"
+        :to="'/community/widget/' + widget.id"
         class="flex flex-wrap gap-4 mt-10"
         v-if="widgets"
       >
         <WidgetCard
           :id="widget.id"
           :title="widget.attributes.title"
-          :image="widget.attributes.image.data.attributes.url"
+          :image="
+            getHighestResolutionImageUrl(
+              widget.attributes.image.data.attributes
+            )
+          "
           :description="widget.attributes.description"
         />
       </NuxtLink>
@@ -39,9 +43,9 @@
 </template>
 
 <script setup>
-
 import { useToast } from "vue-toastification";
 const toast = useToast();
+const { getHighestResolutionImageUrl } = useImage();
 
 let searchQuery = ref("");
 const widgets = ref(null);
@@ -57,7 +61,7 @@ const searchWidgets = async (append = false) => {
     widgets.value = response;
   } catch (error) {
     console.error(error);
-    toast.error('An error has occurred, please try again.', {
+    toast.error("An error has occurred, please try again.", {
       timeout: 2000,
       toastClassName: "custom-toast",
     });

@@ -2,7 +2,9 @@
   <div>
     <div class="container mx-auto p-4">
       <div class="my-10">
-        <h1 class="text-3xl text-center mb-2">Notion workshop official widgets.</h1>
+        <h1 class="text-3xl text-center mb-2">
+          Notion workshop official widgets.
+        </h1>
         <h1 class="text-md text-gray-500 text-center">
           Search among premium beautiful widgets 100% customizable.
         </h1>
@@ -26,7 +28,11 @@
           :key="widget.id"
           :id="widget.id"
           :title="widget.attributes.title"
-          :image="widget.attributes.image.data.attributes.url"
+          :image="
+            getHighestResolutionImageUrl(
+              widget.attributes.image.data.attributes
+            )
+          "
           :description="widget.attributes.description"
           :downloads="widget.attributes.downloads"
         />
@@ -36,10 +42,10 @@
 </template>
 
 <script setup>
-
 import { useToast } from "vue-toastification";
 const toast = useToast();
-  
+const { getHighestResolutionImageUrl } = useImage();
+
 let searchQuery = ref("");
 const widgets = ref(null);
 const { find } = useStrapi();
@@ -51,11 +57,11 @@ const searchWidgets = async (append = false) => {
       _q: searchQuery.value,
     });
 
-    widgets.value = response; 
+    widgets.value = response;
     console.log(response);
   } catch (error) {
     console.error(error);
-    toast.error('An error has occurred, please try again.', {
+    toast.error("An error has occurred, please try again.", {
       timeout: 2000,
       toastClassName: "custom-toast",
     });

@@ -7,7 +7,9 @@
         :link="'/community/widget/' + widget.id"
         :id="widget.id"
         :title="widget.attributes.title"
-        :image="widget.attributes.image.data.attributes.url"
+        :image="
+          getHighestResolutionImageUrl(widget.attributes.image.data.attributes)
+        "
         :description="widget.attributes.description"
         :downloads="widget.attributes.downloads"
         type="community-widget"
@@ -19,8 +21,10 @@
         :id="customization.id"
         :title="customization.attributes.title"
         :image="
-          customization.attributes.widget.data.attributes.image.data.attributes
-            .url
+          getHighestResolutionImageUrl(
+            customization.attributes.widget.data.attributes.image.data
+              .attributes
+          )
         "
         description="An official widget"
         :downloads="0"
@@ -38,9 +42,9 @@
 </template>
 
 <script setup>
-
 import { useToast } from "vue-toastification";
 const toast = useToast();
+const { getHighestResolutionImageUrl } = useImage();
 
 const widgets = ref(null);
 const customizations = ref(null);
@@ -62,7 +66,7 @@ if (userWidgetsId.length) {
     widgets.value = communityWidgets.data;
   } catch (error) {
     console.error(error);
-    toast.error('An error has occurred, please try again.', {
+    toast.error("An error has occurred, please try again.", {
       timeout: 2000,
       toastClassName: "custom-toast",
     });
@@ -82,10 +86,9 @@ if (userCustomizationsId.length) {
       },
     });
     customizations.value = WidgetCustomizations.data;
-    console.log(customizations.value);
   } catch (error) {
     console.error(error);
-    toast.error('An error has occurred, please try again.', {
+    toast.error("An error has occurred, please try again.", {
       timeout: 2000,
       toastClassName: "custom-toast",
     });
