@@ -6,9 +6,9 @@
         &copy;  Notion Workshop, 2023.
       </p>
       <div class="order-1 md:order-2">
-        <span class="px-2">About us</span>
-        <span class="px-2 border-l">Contact us</span>
-        <span class="px-2 border-l">Privacy Policy</span>
+        <NuxtLink class="px-2">About us</NuxtLink>
+        <NuxtLink to="/contact" class="px-2 border-l">Contact us</NuxtLink>
+        <NuxtLink class="px-2 border-l">Privacy Policy</NuxtLink>
       </div>
     </div>
 </template>
