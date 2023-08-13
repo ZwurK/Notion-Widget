@@ -49,9 +49,6 @@
 import { useToast } from "vue-toastification";
 const toast = useToast();
 
-import { useWidgetStore } from '~/store/widget';
-const widgetStore = useWidgetStore();
-
 const showWidgets = ref(false);
 const user = useStrapiUser();
 const widgets = ref(null);
@@ -65,7 +62,6 @@ const handleCreateCustomization = async (widgetId, widgetTitle) => {
         widget: widgetId
     });
     if (response && response.data.id) {
-      widgetStore.selectWidget({id: widgetId, name: widgetTitle});
       navigateTo(`/dashboard/custom-widget/${response.data.id}`);
     } else {
       console.error("Error : UUID lacking");
