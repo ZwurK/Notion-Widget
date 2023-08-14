@@ -51,24 +51,23 @@ let searchQuery = ref("");
 const widgets = ref(null);
 const { find } = useStrapi();
 
-const searchWidgets = async (append = false) => {
-  try {
-    const response = await find("community-widgets", {
+const { data, pending, refresh, error } = await useAsyncData(
+  "official-widget",
+  () =>
+    find("community-widgets", {
       populate: "image",
       _q: searchQuery.value,
-    });
+    })
+);
 
-    widgets.value = response;
-  } catch (error) {
-    console.error(error);
-    toast.error("An error has occurred, please try again.", {
-      timeout: 2000,
-      toastClassName: "custom-toast",
-    });
-  }
-};
+console.log(data.value);
+widgets.value = data.value;
 
-onMounted(async () => {
-  await searchWidgets();
-});
+if (error.value) {
+  console.log(error.value);
+  toast.error("An error has occurred, please try again.", {
+    timeout: 2000,
+    toastClassName: "custom-toast",
+  });
+}
 </script>

@@ -20,14 +20,10 @@ const { findOne } = useStrapi();
 const route = useRoute();
 const customization = ref(null);
 
-const { data, pending, refresh, error } = await useAsyncData(
-  "customization",
-  () =>
-    findOne("customizations", route.params.id, {
-      populate: "widget",
-    })
-);
-customization.value = data.value.data;
+const response = await findOne("customizations", route.params.id, {
+  populate: "widget",
+});
+customization.value = response.data;
 let currentComponent;
 switch (customization.value.attributes.widget.data.attributes.title) {
   case "Clock":
