@@ -43,7 +43,6 @@
 </template>
 
 <script setup>
-
 import { useWidgetStore } from "~/store/widget";
 const widgetStore = useWidgetStore();
 
@@ -66,6 +65,10 @@ const saveCustomization = async () => {
       await update("customizations", route.params.id, {
         title: title.value,
         settings: widgetStore.editableProps,
+      });
+      toast.success("Customization saved.", {
+        timeout: 2000,
+        toastClassName: "custom-toast",
       });
     } catch (error) {
       console.error(error);

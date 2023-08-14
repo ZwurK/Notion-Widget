@@ -35,6 +35,11 @@
           to="/dashboard/my-widgets"
           >My widgets</NuxtLink
         >
+        <NuxtLink
+          :class="isActive(['/dashboard/subscribe'])"
+          to="/dashboard/subscribe"
+          >Subscribe</NuxtLink
+        >
         <NuxtLink :class="isActive('/dashboard/edit')" to="/dashboard/edit"
           >Edit account</NuxtLink
         >
