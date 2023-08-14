@@ -1,6 +1,6 @@
 <template>
   <div class="container mx-auto p-4">
-    <div class="flex flex-wrap gap-4 mt-10">
+    <div class="flex flex-wrap gap-4 mt-10 justify-center items-center">
       <WidgetCard
         v-for="widget in widgets"
         :key="widget.id"
