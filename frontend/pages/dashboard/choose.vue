@@ -29,15 +29,18 @@
     <div v-if="widgets && showWidgets">
       <h1 class="text-center text-2xl my-10">Choose a widget to custom</h1>
       <div class="flex flex-wrap gap-4 mt-10">
-        <div @click="handleCreateCustomization(widget.id, widget.attributes.title)" v-for="widget in widgets.data"> 
+        <div
+          @click="handleCreateCustomization(widget.id)"
+          v-for="widget in widgets.data"
+        >
           <WidgetCard
-          :key="widget.id"
-          :id="widget.id"
-          :title="widget.attributes.title"
-          :image="widget.attributes.image.data.attributes.url"
-          :description="widget.attributes.description"
-          :downloads="widget.attributes.downloads"
-        />
+            :key="widget.id"
+            :id="widget.id"
+            :title="widget.attributes.title"
+            :image="widget.attributes.image.data.attributes.url"
+            :description="widget.attributes.description"
+            :downloads="widget.attributes.downloads"
+          />
         </div>
       </div>
     </div>
@@ -45,7 +48,6 @@
 </template>
 
 <script setup>
-
 import { useToast } from "vue-toastification";
 const toast = useToast();
 
@@ -54,26 +56,38 @@ const user = useStrapiUser();
 const widgets = ref(null);
 const { find, create } = useStrapi();
 
-
-const handleCreateCustomization = async (widgetId, widgetTitle) => {
+const handleCreateCustomization = async (widgetId) => {
   try {
-    const response = await create('customizations', {
+    const userCustomizationsId = user.value
+      ? user.value.customizations.map((customization) => customization.id)
+      : [];
+    if (userCustomizationsId.length < 3) {
+      const response = await create("customizations", {
         author: user.value.id,
-        widget: widgetId
-    });
-    if (response && response.data.id) {
-      navigateTo(`/dashboard/custom-widget/${response.data.id}`);
+        widget: widgetId,
+      });
+      if (response && response.data.id) {
+        navigateTo(`/dashboard/custom-widget/${response.data.id}`);
+      } else {
+        console.error("Error : UUID lacking");
+      }
     } else {
-      console.error("Error : UUID lacking");
+      toast.error(
+        "You've reached your widget creation limit. Subscribe to create new widgets.",
+        {
+          timeout: 2000,
+          toastClassName: "custom-toast",
+        }
+      );
     }
   } catch (error) {
     console.error(error);
-    toast.error('An error has occurred, please try again.', {
+    toast.error("An error has occurred, please try again.", {
       timeout: 2000,
       toastClassName: "custom-toast",
     });
   }
-}
+};
 
 const searchWidgets = async () => {
   try {
@@ -84,7 +98,7 @@ const searchWidgets = async () => {
     widgets.value = response;
   } catch (error) {
     console.error(error);
-    toast.error('An error has occurred, please try again.', {
+    toast.error("An error has occurred, please try again.", {
       timeout: 2000,
       toastClassName: "custom-toast",
     });

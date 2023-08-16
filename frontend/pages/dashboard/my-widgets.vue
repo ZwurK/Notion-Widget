@@ -44,12 +44,12 @@
 <script setup>
 import { useToast } from "vue-toastification";
 const toast = useToast();
+const user = useStrapiUser();
+const { find } = useStrapi();
 const { getHighestResolutionImageUrl } = useImage();
 
 const widgets = ref(null);
 const customizations = ref(null);
-const user = useStrapiUser();
-const { find } = useStrapi();
 
 const userWidgetsId = user.value
   ? user.value.widgets.map((widget) => widget.id)
