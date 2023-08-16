@@ -9,7 +9,7 @@ export default defineNuxtConfig({
 
   strapi: {
     auth: {
-      populate: ['widgets', 'customizations']
+      populate: ['widgets', 'customizations', 'role']
     }
   },
 
@@ -31,6 +31,6 @@ export default defineNuxtConfig({
 
   build: {
     transpile: ['vue-toastification'],
-  }
+  },
 
 })

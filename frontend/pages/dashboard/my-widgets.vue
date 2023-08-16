@@ -95,8 +95,6 @@ if (userCustomizationsId.length) {
   }
 }
 
-console.log('test')
-
 definePageMeta({
   layout: "dashboard",
   middleware: "auth"

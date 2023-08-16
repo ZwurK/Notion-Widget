@@ -35,9 +35,14 @@
           to="/dashboard/my-widgets"
           >My widgets</NuxtLink
         >
-        <NuxtLink
-          :class="isActive(['/dashboard/subscribe'])"
-          to="/dashboard/subscribe"
+        <NuxtLink v-if="role === 'Premium'"
+          :class="isActive(['/manage-subscription'])"
+          to="/subscribe/manage-subscription"
+          >Manage subscription</NuxtLink
+        >
+        <NuxtLink v-else
+          :class="isActive(['/subscribe'])"
+          to="/subscribe"
           >Subscribe</NuxtLink
         >
         <NuxtLink :class="isActive('/dashboard/edit')" to="/dashboard/edit"
@@ -54,6 +59,8 @@
 </template>
 
 <script setup>
+const user = useStrapiUser()
+const role = ref(user.value.role.name)
 const route = useRoute();
 const showMenu = ref(false);
 const hovered = ref(false);
