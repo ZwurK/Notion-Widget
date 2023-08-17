@@ -33,6 +33,7 @@
               widget.attributes.image.data.attributes
             )
           "
+          :link="'/dashboard/choose'"
           :description="widget.attributes.description"
           :downloads="widget.attributes.downloads"
         />
@@ -55,20 +56,27 @@ const { data, pending, refresh, error } = await useAsyncData(
   () =>
     find("official-widgets", {
       populate: "image",
-      _q: searchQuery.value,
     })
 );
-
-console.log(data.value);
 widgets.value = data.value;
 
-if(error.value) {
-  console.log(error.value)
-  toast.error("An error has occurred, please try again.", {
-  timeout: 2000,
-  toastClassName: "custom-toast",
-});
-}
+const searchWidgets = async () => {
+  const { data, pending, refresh, error } = await useAsyncData(
+    "official-widget",
+    () =>
+      find("official-widgets", {
+        populate: "image",
+        _q: searchQuery.value,
+      })
+  );
 
+  widgets.value = data.value;
 
+  if (error.value) {
+    toast.error("An error has occurred, please try again.", {
+      timeout: 2000,
+      toastClassName: "custom-toast",
+    });
+  }
+};
 </script>

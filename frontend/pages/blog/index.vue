@@ -23,7 +23,7 @@
       <div class="flex flex-wrap gap-4 mt-10" v-if="articles">
         <Card
           v-for="article in articles.data"
-          :link="'/blog/article/'+article.id"
+          :link="'/blog/article/' + article.id"
           :key="article.id"
           :id="article.id"
           :title="article.attributes.title"
@@ -57,15 +57,24 @@ const { data, pending, refresh, error } = await useAsyncData(
       _q: searchQuery.value,
     })
 );
-
-console.log(data.value);
 articles.value = data.value;
 
-if (error.value) {
-  console.log(error.value);
-  toast.error("An error has occurred, please try again.", {
-    timeout: 2000,
-    toastClassName: "custom-toast",
-  });
-}
+const searchArticles = async () => {
+  const { data, pending, refresh, error } = await useAsyncData(
+    "official-widget",
+    () =>
+      find("articles", {
+        populate: "image",
+        _q: searchQuery.value,
+      })
+  );
+  articles.value = data.value;
+
+  if (error.value) {
+    toast.error("An error has occurred, please try again.", {
+      timeout: 2000,
+      toastClassName: "custom-toast",
+    });
+  }
+};
 </script>
