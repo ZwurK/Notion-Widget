@@ -37,7 +37,7 @@
         >
         <NuxtLink v-if="role === 'Premium'"
           :class="isActive(['/manage-subscription'])"
-          to="/subscribe/manage-subscription"
+          to="https://billing.stripe.com/p/login/test_00gbJj78M3tQ5KofYY"
           >Manage subscription</NuxtLink
         >
         <NuxtLink v-else

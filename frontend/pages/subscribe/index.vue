@@ -73,7 +73,7 @@ onMounted(() => {
 
 definePageMeta({
   layout: "dashboard",
-  middleware: "auth",
+  middleware: ["auth", "subscribed"],
 });
 
 useHead({

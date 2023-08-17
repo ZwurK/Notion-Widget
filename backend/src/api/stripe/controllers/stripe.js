@@ -33,10 +33,10 @@ module.exports = {
           const email = customer.email;
 
           const user = await strapi.db
-          .query("plugin::users-permissions.user")
-          .findOne({
-            where: { email: email },
-          });
+            .query("plugin::users-permissions.user")
+            .findOne({
+              where: { email: email },
+            });
 
           if (!user) {
             ctx.status = 404;
@@ -47,14 +47,41 @@ module.exports = {
           await strapi.db.query("plugin::users-permissions.user").update({
             where: { email: email },
             data: {
-              role: 3
+              role: 3,
             },
           });
         }
         break;
+      case "customer.subscription.deleted":
+        const subscriptionDeleted = event.data.object;
+        if (subscriptionDeleted.customer) {
+          const customer = await stripe.customers.retrieve(
+            subscriptionDeleted.customer
+          );
+          const email = customer.email;
+
+          const user = await strapi.db
+            .query("plugin::users-permissions.user")
+            .findOne({
+              where: { email: email },
+            });
+
+          if (!user) {
+            ctx.status = 404;
+            ctx.body = { error: "User not found" };
+            return;
+          }
+
+          await strapi.db.query("plugin::users-permissions.user").update({
+            where: { email: email },
+            data: {
+              role: 1,
+            },
+          });
+        }
       // ... handle other event types
       default:
-      // console.log(`Unhandled event type ${event.type}`);
+        console.log(`Unhandled event type ${event.type}`);
     }
 
     // Return a 200 response to acknowledge receipt of the event

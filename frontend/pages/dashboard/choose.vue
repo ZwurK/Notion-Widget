@@ -61,7 +61,7 @@ const handleCreateCustomization = async (widgetId) => {
     const userCustomizationsId = user.value
       ? user.value.customizations.map((customization) => customization.id)
       : [];
-    if (userCustomizationsId.length < 3) {
+    if (userCustomizationsId.length < 3 || user.value.role.id === 3) {
       const response = await create("customizations", {
         author: user.value.id,
         widget: widgetId,
