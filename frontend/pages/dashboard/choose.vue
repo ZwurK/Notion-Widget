@@ -33,7 +33,7 @@
           @click="handleCreateCustomization(widget.id)"
           v-for="widget in widgets.data"
         >
-          <WidgetCard
+          <Card
             :key="widget.id"
             :id="widget.id"
             :title="widget.attributes.title"

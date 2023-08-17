@@ -14,7 +14,7 @@
         :downloads="widget.attributes.downloads"
         type="community-widget"
       />
-      <WidgetCard
+      <Card
         v-for="customization in customizations"
         :key="customization.id"
         :link="'/official/widget/' + customization.id"

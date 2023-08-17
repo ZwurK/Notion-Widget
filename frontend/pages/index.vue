@@ -23,7 +23,7 @@
         </div>
       </form>
       <div class="flex flex-wrap gap-4 mt-10" v-if="widgets">
-        <WidgetCard
+        <Card
           v-for="widget in widgets.data"
           :key="widget.id"
           :id="widget.id"

@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "@pinia/nuxt": "^0.4.11",
+    "markdown-it": "^13.0.1",
     "pinia": "^2.1.4",
     "vue-toastification": "^2.0.0-rc.5"
   }

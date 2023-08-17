@@ -4,7 +4,7 @@
       <h1 class="text-3xl text-center mb-2">{{ user.username }}</h1>
     </div>
     <div class="flex flex-wrap gap-4 mt-10">
-      <WidgetCard
+      <Card
         v-for="widget in widgets"
         :key="widget.id"
         :id="widget.id"

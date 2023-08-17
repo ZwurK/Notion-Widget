@@ -2,17 +2,17 @@
   <div>
     <div class="container mx-auto p-4">
       <div class="my-10">
-        <h1 class="text-3xl text-center mb-2">Notion, Reimagined by You.</h1>
+        <h1 class="text-3xl text-center mb-2">Notion workshop blog.</h1>
         <h1 class="text-md text-gray-500 text-center">
-          Thousands of widgets ready to use.
+          Learn more about this wonderful tool, notion.
         </h1>
       </div>
-      <form @submit.prevent="searchWidgets">
+      <form @submit.prevent="searchArticles">
         <div class="flex border rounded overflow-hidden">
           <input
             v-model="searchQuery"
             type="text"
-            placeholder="Search widgets..."
+            placeholder="Search articles..."
             class="px-4 py-2 w-full outline-none"
           />
           <button type="submit" class="bg-black text-white px-4 py-2">
@@ -20,24 +20,22 @@
           </button>
         </div>
       </form>
-      <NuxtLink
-        v-for="widget in widgets.data"
-        :key="widget.id"
-        :to="'/community/widget/' + widget.id"
-        class="flex flex-wrap gap-4 mt-10"
-        v-if="widgets"
-      >
+      <div class="flex flex-wrap gap-4 mt-10" v-if="articles">
         <Card
-          :id="widget.id"
-          :title="widget.attributes.title"
+          v-for="article in articles.data"
+          :link="'/blog/article/'+article.id"
+          :key="article.id"
+          :id="article.id"
+          :title="article.attributes.title"
           :image="
             getHighestResolutionImageUrl(
-              widget.attributes.image.data.attributes
+              article.attributes.image.data.attributes
             )
           "
-          :description="widget.attributes.description"
+          :description="article.attributes.description"
+          :downloads="article.attributes.downloads"
         />
-      </NuxtLink>
+      </div>
     </div>
   </div>
 </template>
@@ -48,20 +46,20 @@ const toast = useToast();
 const { getHighestResolutionImageUrl } = useImage();
 
 let searchQuery = ref("");
-const widgets = ref(null);
+const articles = ref(null);
 const { find } = useStrapi();
 
 const { data, pending, refresh, error } = await useAsyncData(
   "official-widget",
   () =>
-    find("community-widgets", {
+    find("articles", {
       populate: "image",
       _q: searchQuery.value,
     })
 );
 
 console.log(data.value);
-widgets.value = data.value;
+articles.value = data.value;
 
 if (error.value) {
   console.log(error.value);
