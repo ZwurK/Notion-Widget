@@ -38,7 +38,7 @@
           class="w-full p-2 border border-gray-300 rounded"
         ></textarea>
       </div>
-      <div class="mb-4">
+      <!-- <div class="mb-4">
         <label for="price" class="block mb-2 text-sm font-bold text-gray-600"
           >Price:</label
         >
@@ -48,7 +48,7 @@
           type="text"
           class="w-full p-2 border border-gray-300 rounded"
         />
-      </div>
+      </div> -->
       <button
         @click="handleUpdateWidget"
         type="submit"
@@ -76,7 +76,7 @@ const widgetData = ref({
 const handleUpdateWidget = async () => {
   try {
     const { update } = useStrapi();
-    await update("widgets", route.params.id, {
+    await update("community-widgets", route.params.id, {
       title: widgetData.value.title,
       description: widgetData.value.description,
       code: widgetData.value.code,
@@ -100,14 +100,13 @@ onMounted(async () => {
   try {
     const { findOne } = useStrapi();
     const id = route.params.id;
-    const widget = await findOne("widgets", route.params.id, {
+    const widget = await findOne("community-widgets", route.params.id, {
       populate: "image",
     });
     widgetData.value.title = widget.data.attributes.title;
     widgetData.value.description = widget.data.attributes.description;
     widgetData.value.code = widget.data.attributes.code;
     widgetData.value.price = widget.data.attributes.price;
-    console.log(widget);
   } catch (error) {
     console.error(error);
     toast.error('An error has occurred, please try again.', {

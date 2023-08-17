@@ -20,14 +20,12 @@
           </button>
         </div>
       </form>
-      <NuxtLink
-        v-for="widget in widgets.data"
-        :key="widget.id"
-        :to="'/community/widget/' + widget.id"
+      <div      
         class="flex flex-wrap gap-4 mt-10"
-        v-if="widgets"
       >
         <Card
+        v-for="widget in widgets.data"
+        :key="widget.id"
           :id="widget.id"
           :title="widget.attributes.title"
           :image="
@@ -35,9 +33,11 @@
               widget.attributes.image.data.attributes
             )
           "
+          :link="'/community/widget/'+widget.id"
           :description="widget.attributes.description"
+          type="community"
         />
-      </NuxtLink>
+      </div>
     </div>
   </div>
 </template>
@@ -52,7 +52,7 @@ const widgets = ref(null);
 const { find } = useStrapi();
 
 const { data, pending, refresh, error } = await useAsyncData(
-  "official-widget",
+  "community-widget",
   () =>
     find("community-widgets", {
       populate: "image",
@@ -60,7 +60,6 @@ const { data, pending, refresh, error } = await useAsyncData(
     })
 );
 
-console.log(data.value);
 widgets.value = data.value;
 
 if (error.value) {

@@ -21,14 +21,14 @@
       <span
         class="inline-flex items-center text-white rounded-full px-3 py-1 text-sm font-semibold bg-black"
       >
-        {{ downloads || 0 }} <span class="mx-1">downloads</span>
+        {{ type }}
       </span>
     </div>
     <div
       v-if="route.path === '/dashboard/my-widgets'"
       class="absolute bottom-2 right-2 space-x-2"
     >
-    <button @click.stop='navigateTo(type == "community-widget" ? `/dashboard/edit-widget/${id}` : `/dashboard/custom-widget/${id}`)' class="bg-black text-white p-2 rounded">
+    <button @click.stop='navigateTo(type == "community" ? `/dashboard/edit-widget/${id}` : `/dashboard/custom-widget/${id}`)' class="bg-black text-white p-2 rounded">
         <IconsEdit />
       </button>
       <button
@@ -69,10 +69,6 @@ const props = defineProps({
   description: {
     type: String,
     required: true,
-  },
-  downloads: {
-    type: Number,
-    default: 0,
   },
   type: {
     type: String,

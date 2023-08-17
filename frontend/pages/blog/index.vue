@@ -33,7 +33,7 @@
             )
           "
           :description="article.attributes.description"
-          :downloads="article.attributes.downloads"
+          type="article"
         />
       </div>
     </div>

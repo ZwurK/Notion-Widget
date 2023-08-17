@@ -71,8 +71,8 @@ const { delete: _delete } = useStrapi();
 
 const handleDeleteWidget = async () => {
   try {
-    if(props.type == "community-widget") {
-      const response = await _delete("widgets", props.widgetId);
+    if(props.type == "community") {
+      const response = await _delete("community-widgets", props.widgetId);
     } else {
       const response = await _delete("customizations", props.widgetId);
     }

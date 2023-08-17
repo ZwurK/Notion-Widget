@@ -38,7 +38,7 @@
           class="w-full p-2 border border-gray-300 rounded"
         ></textarea>
       </div>
-      <div class="mb-4">
+      <!-- <div class="mb-4">
         <label for="price" class="block text-sm font-medium text-gray-700 mb-2"
           >Price:</label
         >
@@ -49,7 +49,7 @@
           required
           class="w-full p-2 border border-gray-300 rounded"
         />
-      </div>
+      </div> -->
       <div class="mb-4">
         <label for="image" class="block text-sm font-medium text-gray-700 mb-2"
           >Image:</label
@@ -90,7 +90,7 @@ const widget = ref({
 const imageInput = ref(null);
 
 const handleFileChange = () => {
-  console.log("File changed:", imageInput.value.files[0]);
+  // console.log("File changed:", imageInput.value.files[0]);
 };
 
 const handleCreateWidget = async () => {
@@ -102,7 +102,7 @@ const handleCreateWidget = async () => {
     formData.append("data", JSON.stringify(widget.value));
 
     // 2. Envoyer le formulaire à Strapi
-    const { data } = await client(`/widgets`, {
+    const { data } = await client(`/community-widgets`, {
       method: "POST",
       body: formData,
     });

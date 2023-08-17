@@ -1,7 +1,7 @@
 <template>
   <div class="container mx-auto p-4">
     <div class="flex flex-wrap gap-4 mt-10 justify-center items-center">
-      <WidgetCard
+      <Card
         v-for="widget in widgets"
         :key="widget.id"
         :link="'/community/widget/' + widget.id"
@@ -11,8 +11,7 @@
           getHighestResolutionImageUrl(widget.attributes.image.data.attributes)
         "
         :description="widget.attributes.description"
-        :downloads="widget.attributes.downloads"
-        type="community-widget"
+        type="community"
       />
       <Card
         v-for="customization in customizations"
@@ -27,8 +26,7 @@
           )
         "
         description="An official widget"
-        :downloads="0"
-        type="customization"
+        type="official"
       />
       <NuxtLink
         to="/dashboard/choose"

@@ -35,7 +35,7 @@
           "
           :link="'/dashboard/choose'"
           :description="widget.attributes.description"
-          :downloads="widget.attributes.downloads"
+          type="official"
         />
       </div>
     </div>
