@@ -3,11 +3,11 @@
     <div class="container mx-auto p-4">
       <div class="my-10">
         <h1 class="text-3xl text-center mb-2">
-          Notion workshop official widgets.
+          Notion Toolbox official widgets.
         </h1>
-        <h1 class="text-md text-gray-500 text-center">
+        <h2 class="text-md text-gray-500 text-center">
           Search among premium beautiful widgets 100% customizable.
-        </h1>
+        </h2>
       </div>
       <form @submit.prevent="searchWidgets">
         <div class="flex border rounded overflow-hidden">
