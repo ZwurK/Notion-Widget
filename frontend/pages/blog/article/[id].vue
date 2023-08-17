@@ -21,7 +21,6 @@ try {
     findOne("articles", route.params.id)
   );
   article.value = data.value.data;
-  console.log(article.value)
 } catch (error) {
   console.error(error);
   toast.error("An error has occurred, please try again.", {

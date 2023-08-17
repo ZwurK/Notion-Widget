@@ -56,7 +56,7 @@ const title = ref(props.currentTitle ?? null);
 
 function updateProp(name, value) {
   widgetStore.updatePropValue(name, value);
-  console.log(widgetStore.editableProps);
+  // console.log(widgetStore.editableProps);
 }
 
 const saveCustomization = async () => {

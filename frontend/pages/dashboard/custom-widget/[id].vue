@@ -1,5 +1,5 @@
 <template>
-  <div class="flex w-full" v-if="!pending && customization">
+  <div class="flex w-full" v-if="customization">
     <CustomizationPanel
       :currentTitle="customization.attributes.title"
       class="flex-none w-1/3"
@@ -30,4 +30,8 @@ switch (customization.value.attributes.widget.data.attributes.title) {
     currentComponent = resolveComponent("WidgetsClock");
     break;
 }
+
+definePageMeta({
+  middleware: 'auth'
+});
 </script>

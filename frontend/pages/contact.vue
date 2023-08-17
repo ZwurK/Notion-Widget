@@ -70,7 +70,7 @@ const handleContact = async () => {
         subject: subject.value,
         message: message.value
     });
-    toast.success("You have successfully logged in.", {
+    toast.success("Your message has been successfully sent.", {
       timeout: 2000,
       toastClassName: "custom-toast",
     });

@@ -39,7 +39,8 @@
             :title="widget.attributes.title"
             :image="widget.attributes.image.data.attributes.url"
             :description="widget.attributes.description"
-            :downloads="widget.attributes.downloads"
+            type="official"
+            link=""
           />
         </div>
       </div>
@@ -107,5 +108,9 @@ const searchWidgets = async () => {
 
 onMounted(async () => {
   await searchWidgets();
+});
+
+definePageMeta({
+  middleware: 'auth'
 });
 </script>
