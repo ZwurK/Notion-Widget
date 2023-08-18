@@ -5,12 +5,9 @@
       :customization="customization.data.attributes.settings"
     />
   </div>
-  <p>{{ customization }}</p>
-  <p>{{ currentComponent }}</p>
 </template>
 
 <script setup>
-
 const customization = ref(null);
 const { findOne } = useStrapi();
 const route = useRoute();
@@ -26,6 +23,9 @@ const getCustomization = async () => {
       case "Clock":
         currentComponent.value = resolveComponent("WidgetsClock");
         break;
+      case "Countdown":
+        currentComponent.value = resolveComponent("WidgetsCountdown");
+        break;
     }
   } catch (error) {
     console.error(error);
@@ -36,9 +36,9 @@ try {
   const { data, pending, refresh, error } = await useAsyncData(
     "customization",
     () =>
-    findOne("customizations", route.params.id, {
-      populate: "widget",
-    })
+      findOne("customizations", route.params.id, {
+        populate: "widget",
+      })
   );
 
   if (data.value && data.value.data) {
@@ -53,10 +53,10 @@ try {
   }
 } catch (error) {
   console.error(error);
-  toast.error('An error has occurred, please try again.', {
-      timeout: 2000,
-      toastClassName: "custom-toast",
-    });
+  toast.error("An error has occurred, please try again.", {
+    timeout: 2000,
+    toastClassName: "custom-toast",
+  });
 }
 
 onMounted(async () => {

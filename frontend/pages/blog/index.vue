@@ -50,7 +50,7 @@ const articles = ref(null);
 const { find } = useStrapi();
 
 const { data, pending, refresh, error } = await useAsyncData(
-  "official-widget",
+  "article",
   () =>
     find("articles", {
       populate: "image",
@@ -61,7 +61,7 @@ articles.value = data.value;
 
 const searchArticles = async () => {
   const { data, pending, refresh, error } = await useAsyncData(
-    "official-widget",
+    "article",
     () =>
       find("articles", {
         populate: "image",

@@ -29,9 +29,12 @@ switch (customization.value.attributes.widget.data.attributes.title) {
   case "Clock":
     currentComponent = resolveComponent("WidgetsClock");
     break;
+  case "Countdown":
+    currentComponent = resolveComponent("WidgetsCountdown");
+    break;
 }
 
 definePageMeta({
-  middleware: 'auth'
+  middleware: "auth",
 });
 </script>

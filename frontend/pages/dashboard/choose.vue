@@ -2,7 +2,7 @@
   <div class="container mx-auto p-4">
     <h1 class="text-2xl font-bold mb-6 text-center">Create a widget</h1>
 
-    <div class="flex justify-center gap-10">
+    <div class="flex flex-wrap justify-center gap-10">
       <div class="flex flex-col items-center p-6 rounded border-2 border-black">
         <h2 class="text-xl font-semibold mb-4">Custom an official widget</h2>
         <p>Choose a widget and custom it.</p>

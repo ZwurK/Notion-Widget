@@ -4,8 +4,8 @@
       <div class="flex justify-between items-center py-4">
         <!-- Logo -->
         <NuxtLink to="/" class="flex items-center gap-4">
-          <img class="w-10" src="/temp.png" alt="logo">
-          <span class="hidden md:block">Notion Toolbox</span>
+          <img class="w-20" src="/logo.png" alt="logo">
+          <span class="text-xl hidden md:block">Notion Toolbox</span>
         </NuxtLink>
 
         <!-- Links for large screens -->
@@ -30,7 +30,7 @@
         <div class="flex items-center space-x-2">
           <div v-if="token" class="w-14 h-14 rounded-full flex items-center justify-center">
             <NuxtLink to="/dashboard" class="text-xl" title="Account management">
-              <img alt="My account" src="https://media.istockphoto.com/id/877076656/fr/vectoriel/ic%C3%B4ne-de-vecteur-de-panda.jpg?s=612x612&w=0&k=20&c=bwpSgi07IoRauWKVEEklQra43bm6VfkYQaduB3vxqMA=">
+              <img class="w-20" alt="My account" src="account.png">
             </NuxtLink>
           </div>
           <div class="flex gap-4" v-else>
