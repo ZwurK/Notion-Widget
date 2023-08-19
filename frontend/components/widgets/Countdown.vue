@@ -1,6 +1,6 @@
 <template>
   <div
-    class="text-gray-800 w-screen h-screen text-center flex flex-col justify-center items-center gap-"
+    class="text-gray-800 w-screen h-screen text-center flex flex-col justify-center items-center"
     :style="
       'background-color: ' +
       computedClasses('container-background-color') +
