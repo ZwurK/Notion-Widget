@@ -26,6 +26,9 @@ const getCustomization = async () => {
       case "Countdown":
         currentComponent.value = resolveComponent("WidgetsCountdown");
         break;
+      case "Quote":
+        currentComponent.value = resolveComponent("WidgetsQuote");
+        break;
     }
   } catch (error) {
     console.error(error);
