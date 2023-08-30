@@ -30,7 +30,7 @@
         <div class="flex items-center space-x-2">
           <div v-if="token" class="w-14 h-14 rounded-full flex items-center justify-center">
             <NuxtLink to="/dashboard" class="text-xl" title="Account management">
-              <img class="w-20" alt="My account" src="account.png">
+              <img class="w-20" alt="My account" src="/account.png">
             </NuxtLink>
           </div>
           <div class="flex gap-4" v-else>
