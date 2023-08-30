@@ -1,6 +1,5 @@
 <template>
-  <div class="w-full">
-    <div class="container m-auto px-6 py-20 md:px-12 lg:px-20">
+  <div class="text-gray-800 w-screen h-screen text-center flex flex-col justify-center items-center">
       <div
         class="items-center justify-center md:flex md:flex-col gap-10 xl:w-10/12"
       >
@@ -57,7 +56,6 @@
           </div>
         </div>
       </div>
-    </div>
   </div>
 </template>
 

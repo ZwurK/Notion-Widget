@@ -3,7 +3,7 @@
     <div class="container mx-auto p-4">
       <div class="my-10">
         <h1 class="text-3xl text-center mb-2">
-          Notion Toolbox official widgets.
+          Notion official widgets.
         </h1>
         <h2 class="text-md text-gray-500 text-center">
           Search among premium beautiful widgets 100% customizable.

@@ -5,7 +5,7 @@
         <!-- Logo -->
         <NuxtLink to="/" class="flex items-center gap-4">
           <img class="w-20" src="/logo.png" alt="logo">
-          <span class="text-xl hidden md:block">Notion Toolbox</span>
+          <span class="text-xl hidden md:block">Notion Widget</span>
         </NuxtLink>
 
         <!-- Links for large screens -->
