@@ -35,6 +35,9 @@ switch (customization.value.attributes.widget.data.attributes.title) {
   case "Quote":
     currentComponent = resolveComponent("WidgetsQuote");
     break;
+  case "Counter":
+    currentComponent = resolveComponent("WidgetsCounter");
+    break;
 }
 
 definePageMeta({

@@ -29,6 +29,9 @@ const getCustomization = async () => {
       case "Quote":
         currentComponent.value = resolveComponent("WidgetsQuote");
         break;
+      case "Counter":
+        currentComponent.value = resolveComponent("WidgetsCounter");
+        break;
     }
   } catch (error) {
     console.error(error);
